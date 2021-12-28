@@ -1,0 +1,17 @@
+syntax = "proto3";
+option go_package ="proto_build/;proto_build";
+
+import "google/api/annotations.proto";
+
+message PagerRequest{
+  string keyword=1;
+  uint64 page=2;
+  uint64 page_size=3;
+}
+
+message PagerResponse{
+  uint64 current_page=1;
+  uint64 last_page=2;
+  uint64 page_zie=3;
+  uint64 total=4;
+}

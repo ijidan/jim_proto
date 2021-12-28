@@ -1,6 +1,8 @@
 syntax = "proto3";
 option go_package ="proto_build/;proto_build";
 
+import "google/api/annotations.proto";
+
 //消息类型
 enum MESSAGE_TYPE {
   TEXT = 0;  //文本消息。
@@ -14,12 +16,12 @@ enum MESSAGE_TYPE {
 
 //文本消息
 message TextMessage{
-  int32 id = 1;
+  uint64 id = 1;
   string content = 2;
 }
 //地理位置消息
 message LocationMessage{
-  int32 id = 1;
+  uint64 id = 1;
   string cover_image = 2;
   float lat = 3;
   float lng = 4;
@@ -28,15 +30,15 @@ message LocationMessage{
 }
 //表情消息
 message FaceMessage{
-  int32 id = 1;
+  uint64 id = 1;
   string symbol = 2;
 }
 //语音消息
 message SoundMessage{
-  int32 id = 1;
+  uint64 id = 1;
   string url = 2;
-  int32 size = 3;
-  int32 seconds = 4;
+  uint64 size = 3;
+  uint64 seconds = 4;
 }
 
 //图片类型
@@ -57,21 +59,21 @@ enum IMAGE_FORMAT{
 message ImageMessageItem{
   IMAGE_TYPE type = 1; // 类型
   IMAGE_FORMAT format = 2; //格式
-  int32 size = 3; //大小
-  int32 width = 4; //宽度
-  int32 height = 5; //高度
+  uint64 size = 3; //大小
+  uint64 width = 4; //宽度
+  uint64 height = 5; //高度
   string url = 6; //链接地址
 }
 
 //图像消息
 message ImageMessage{
-  int32 id = 1;
+  uint64 id = 1;
   repeated ImageMessageItem list = 2;
 }
 //文件消息
 message FileMessage{
-  int32 id = 1;
-  int32 size = 2; //大小
+  uint64 id = 1;
+  uint64 size = 2; //大小
   string name = 3; //文件名
   string url = 4; //链接地址
 }
@@ -87,9 +89,9 @@ enum VIDEO_FORMAT{
 }
 //视频消息
 message VideoMessage{
-  int32 id = 1;
-  int32 size = 2;
-  int32 second = 3;
+  uint64 id = 1;
+  uint64 size = 2;
+  uint64 second = 3;
   string url = 4;
   string format = 5;
   string thumb_url = 6;
