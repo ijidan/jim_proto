@@ -38,23 +38,19 @@ func (this *User) Validate() error {
 	return nil
 }
 
-var _regex_CreateUserRequest_Nickname = regexp.MustCompile(`^[a-z]{2,5}$`)
-var _regex_CreateUserRequest_AvatarUrl = regexp.MustCompile(`^[a-z]{2,5}$`)
+var _regex_CreateUserRequest_Nickname = regexp.MustCompile(`^[a-z0-9]{2,30}$`)
 var _regex_CreateUserRequest_Password = regexp.MustCompile(`^[a-z][a-z0-9]{1,17}$`)
-var _regex_CreateUserRequest_PasswordRpt = regexp.MustCompile(`^[a-z][a-z0-9]{17}$`)
+var _regex_CreateUserRequest_PasswordRpt = regexp.MustCompile(`^[a-z][a-z0-9]{1,17}$`)
 
 func (this *CreateUserRequest) Validate() error {
 	if !_regex_CreateUserRequest_Nickname.MatchString(this.Nickname) {
-		return github_com_mwitkow_go_proto_validators.FieldError("Nickname", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z]{2,5}$"`, this.Nickname))
-	}
-	if !_regex_CreateUserRequest_AvatarUrl.MatchString(this.AvatarUrl) {
-		return github_com_mwitkow_go_proto_validators.FieldError("AvatarUrl", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z]{2,5}$"`, this.AvatarUrl))
+		return github_com_mwitkow_go_proto_validators.FieldError("Nickname", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z0-9]{2,30}$"`, this.Nickname))
 	}
 	if !_regex_CreateUserRequest_Password.MatchString(this.Password) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Password", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z][a-z0-9]{1,17}$"`, this.Password))
 	}
 	if !_regex_CreateUserRequest_PasswordRpt.MatchString(this.PasswordRpt) {
-		return github_com_mwitkow_go_proto_validators.FieldError("PasswordRpt", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z][a-z0-9]{17}$"`, this.PasswordRpt))
+		return github_com_mwitkow_go_proto_validators.FieldError("PasswordRpt", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z][a-z0-9]{1,17}$"`, this.PasswordRpt))
 	}
 	return nil
 }

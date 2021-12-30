@@ -26,11 +26,11 @@ message User{
 }
 
 message CreateUserRequest{
-  string nickname = 1 [(validator.field) = {regex: "^[a-z]{2,5}$"}];
+  string nickname = 1 [(validator.field) = {regex: "^[a-z0-9]{2,30}$"}];
   Gender gender = 2 [(validator.field) = {msg_exists:true}];
-  string avatar_url = 3 [(validator.field) = {regex: "^[a-z]{2,5}$"}];
+  string avatar_url = 3 [(validator.field) = {msg_exists: true}];
   string password = 4 [(validator.field) = {regex:"^[a-z][a-z0-9]{1,17}$"}];
-  string password_rpt = 5 [(validator.field) = {regex:"^[a-z][a-z0-9]{17}$"}];
+  string password_rpt = 5 [(validator.field) = {regex:"^[a-z][a-z0-9]{1,17}$"}];
 }
 
 message CreateUserResponse{
