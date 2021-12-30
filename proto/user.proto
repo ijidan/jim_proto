@@ -1,9 +1,11 @@
-syntax="proto3";
-option go_package ="proto_build/;proto_build";
+syntax = "proto3";
+option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
 import "common.proto";
+
 
 
 //性别
@@ -24,30 +26,33 @@ message User{
 }
 
 message CreateUserRequest{
-  string nickname = 1;
-  Gender gender = 2;
-  string avatar_url = 3;
-  string password=4;
-  string password_rpt=5;
+  string nickname = 1 [(validator.field) = {regex: "^[a-z]{2,5}$"}];
+  Gender gender = 2 [(validator.field) = {msg_exists:true}];
+  string avatar_url = 3 [(validator.field) = {regex: "^[a-z]{2,5}$"}];
+  string password = 4 [(validator.field) = {regex:"^[a-z][a-z0-9]{1,17}$"}];
+  string password_rpt = 5 [(validator.field) = {regex:"^[a-z][a-z0-9]{17}$"}];
 }
 
 message CreateUserResponse{
-  User user=1;
+  User user = 1;
 }
 
 message GetUserRequest{
-  uint64 id=1;
+  uint64 id = 1 [(validator.field) = {int_gt: 0}];
 }
 message GetUserResponse{
-  User user=1;
+  User user = 1;
 }
 
 message QueryUserRequest{
-  PagerRequest pager=1;
+  string keyword = 1;
+  uint64 page = 2 [(validator.field)={int_gt:0}];
+  uint64 page_size = 3 [(validator.field)={int_gt:0}];
 }
+
 message QueryUserResponse{
-  PagerResponse pager=1;
-  repeated User user=2;
+  Pager pager = 1;
+  repeated User user = 2;
 }
 
 service UserService{
@@ -57,12 +62,12 @@ service UserService{
     };
   }
   rpc GetUser(GetUserRequest) returns(GetUserResponse){
-    option(google.api.http)={
+    option(google.api.http) = {
       get:"/v1/api/user/{id}"
     };
   }
   rpc QueryUser(QueryUserRequest)returns(QueryUserResponse){
-    option(google.api.http)={
+    option(google.api.http) = {
       get:"/v1/api/users"
     };
   }
