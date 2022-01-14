@@ -1,4 +1,5 @@
 syntax = "proto3";
+package ping;
 option go_package ="proto_build/;proto_build";
 
 import "google/api/annotations.proto";

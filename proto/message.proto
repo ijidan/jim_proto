@@ -1,7 +1,10 @@
 syntax = "proto3";
-option go_package ="proto_build/;proto_build";
+package message;
+option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
+import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+
 
 //消息类型
 enum MESSAGE_TYPE {
@@ -19,6 +22,7 @@ message TextMessage{
   uint64 id = 1;
   string content = 2;
 }
+
 //地理位置消息
 message LocationMessage{
   uint64 id = 1;
@@ -28,11 +32,13 @@ message LocationMessage{
   string map_link = 5;
   string desc = 6;
 }
+
 //表情消息
 message FaceMessage{
   uint64 id = 1;
   string symbol = 2;
 }
+
 //语音消息
 message SoundMessage{
   uint64 id = 1;
@@ -99,4 +105,127 @@ message VideoMessage{
   string thumb_width = 8;
   string thumb_height = 9;
   IMAGE_FORMAT thumb_format = 10;
+}
+
+message SendTextMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  string content = 3  [(validator.field) = {msg_exists:true}];
+}
+
+message SendTextMessageResponse{
+  uint64 id = 1;
+}
+
+message SendLocationMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  LocationMessage location = 3 [(validator.field) = {msg_exists:true}] ;
+}
+
+message SendLocationMessageResponse{
+  uint64 id = 1;
+}
+
+message SendFaceMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  FaceMessage face = 3 [(validator.field) = {msg_exists:true}] ;
+}
+
+message SendFaceMessageResponse{
+  uint64 id = 1;
+}
+
+message SendSoundMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  SoundMessage sound = 3 [(validator.field) = {msg_exists:true}] ;
+}
+
+message SendSoundMessageResponse{
+  uint64 id = 1;
+}
+
+message SendVideoMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  VideoMessage video = 3 [(validator.field) = {msg_exists:true}] ;
+}
+
+message SendVideoMessageResponse{
+  uint64 id = 1;
+}
+
+message SendImageMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  ImageMessageItem image = 3 [(validator.field) = {msg_exists:true}] ;
+}
+
+message SendImageMessageResponse{
+  uint64 id = 1;
+}
+
+message SendFileMessageRequest{
+  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  uint64 to_group_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
+  FaceMessage file = 3 [(validator.field) = {msg_exists:true}] ;
+}
+
+message SendFileMessageResponse{
+  uint64 id = 1;
+}
+
+service MessageService {
+
+  rpc SendTextMessage(SendTextMessageRequest) returns(SendTextMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/text",
+      body:"*"
+    };
+  }
+
+  rpc SendLocationMessage(SendLocationMessageRequest) returns(SendLocationMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/location",
+      body:"*"
+    };
+  }
+
+  rpc SendFceMessage(SendFaceMessageRequest) returns(SendFaceMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/face",
+      body:"*"
+    };
+  }
+
+  rpc SendSoundMessage(SendSoundMessageRequest) returns(SendSoundMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/sound",
+      body:"*"
+    };
+  }
+
+  rpc SendVideoMessage(SendVideoMessageRequest) returns(SendVideoMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/video",
+      body:"*"
+    };
+  }
+
+  rpc SendImageMessage(SendImageMessageRequest) returns(SendImageMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/image",
+      body:"*"
+    };
+  }
+
+  rpc SendFileMessage(SendFileMessageRequest) returns(SendFileMessageResponse){
+    option (google.api.http) = {
+      post: "/v1/api/message/file",
+      body:"*"
+    };
+  }
+
 }

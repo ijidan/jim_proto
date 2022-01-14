@@ -1,2 +1,19 @@
 syntax = "proto3";
-option go_package ="proto_build/;proto_build";
+package group;
+option go_package = "proto_build/;proto_build";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+import "common.proto";
+
+message Group{
+  uint64 id = 1;
+  string name = 2;
+  string introduction = 3;
+  string extra = 4;
+  uint64 user_id=5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+  google.protobuf.Timestamp deleted_at = 8;
+}

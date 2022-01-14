@@ -31,7 +31,7 @@ func NewPingServiceClient(cc grpc.ClientConnInterface) PingServiceClient {
 
 func (c *pingServiceClient) Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error) {
 	out := new(PingResponse)
-	err := c.cc.Invoke(ctx, "/PingService/ping", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ping.PingService/ping", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func _PingService_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/PingService/ping",
+		FullMethod: "/ping.PingService/ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PingServiceServer).Ping(ctx, req.(*PingRequest))
@@ -88,7 +88,7 @@ func _PingService_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "PingService",
+	ServiceName: "ping.PingService",
 	HandlerType: (*PingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

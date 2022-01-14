@@ -1,18 +1,51 @@
 syntax = "proto3";
-option go_package ="proto_build/;proto_build";
+package common;
+option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
+import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
 
+enum Gender{
+  Unknown = 0; //未知
+  Male = 1; //男
+  Female = 2;// 女
+}
+
+message ImageInfo{
+  string name = 1  [(validator.field) = {msg_exists :true}];
+  string type = 2;
+  string url = 3;
+  uint64 width = 4  [(validator.field) = {int_gt: 0}];
+  uint64 height = 5  [(validator.field) = {int_gt: 0}];
+}
 
 message Pager{
-  uint64  page=1;
-  uint64  page_zie=2;
-  uint64  total_rows=3;
-  uint64  total_pages=4;
+  uint64  page = 1;
+  uint64  page_zie = 2;
+  uint64  total_rows = 3;
+  uint64  total_pages = 4;
 }
 
 message CommonResponse{
   uint64   error_code = 1; //错误码
   uint64   business_code = 2; //业务码
   string   message = 3; //信息
+}
+
+message UploadImageRequest{
+  bytes content=1 [(validator.field) = {msg_exists:true}];;
+}
+
+message UploadImageResponse{
+  string url=1;
+}
+
+service CommonService{
+
+  rpc UploadImage(stream UploadImageRequest) returns(UploadImageResponse){
+    option(google.api.http) = {
+      post:"/v1/api/common/image",
+      body:"*"
+    };
+  }
 }

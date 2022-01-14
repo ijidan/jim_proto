@@ -8,6 +8,8 @@ import (
 	math "math"
 	proto "github.com/golang/protobuf/proto"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "github.com/mwitkow/go-proto-validators"
+	regexp "regexp"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
@@ -45,5 +47,165 @@ func (this *FileMessage) Validate() error {
 	return nil
 }
 func (this *VideoMessage) Validate() error {
+	return nil
+}
+
+var _regex_SendTextMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendTextMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendTextMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	return nil
+}
+func (this *SendTextMessageResponse) Validate() error {
+	return nil
+}
+
+var _regex_SendLocationMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendLocationMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendLocationMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	if nil == this.Location {
+		return github_com_mwitkow_go_proto_validators.FieldError("Location", fmt.Errorf("message must exist"))
+	}
+	if this.Location != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Location); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Location", err)
+		}
+	}
+	return nil
+}
+func (this *SendLocationMessageResponse) Validate() error {
+	return nil
+}
+
+var _regex_SendFaceMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendFaceMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendFaceMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	if nil == this.Face {
+		return github_com_mwitkow_go_proto_validators.FieldError("Face", fmt.Errorf("message must exist"))
+	}
+	if this.Face != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Face); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Face", err)
+		}
+	}
+	return nil
+}
+func (this *SendFaceMessageResponse) Validate() error {
+	return nil
+}
+
+var _regex_SendSoundMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendSoundMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendSoundMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	if nil == this.Sound {
+		return github_com_mwitkow_go_proto_validators.FieldError("Sound", fmt.Errorf("message must exist"))
+	}
+	if this.Sound != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Sound); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Sound", err)
+		}
+	}
+	return nil
+}
+func (this *SendSoundMessageResponse) Validate() error {
+	return nil
+}
+
+var _regex_SendVideoMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendVideoMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendVideoMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	if nil == this.Video {
+		return github_com_mwitkow_go_proto_validators.FieldError("Video", fmt.Errorf("message must exist"))
+	}
+	if this.Video != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Video); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Video", err)
+		}
+	}
+	return nil
+}
+func (this *SendVideoMessageResponse) Validate() error {
+	return nil
+}
+
+var _regex_SendImageMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendImageMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendImageMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	if nil == this.Image {
+		return github_com_mwitkow_go_proto_validators.FieldError("Image", fmt.Errorf("message must exist"))
+	}
+	if this.Image != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Image); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Image", err)
+		}
+	}
+	return nil
+}
+func (this *SendImageMessageResponse) Validate() error {
+	return nil
+}
+
+var _regex_SendFileMessageRequest_ToUserId = regexp.MustCompile(`\d+`)
+var _regex_SendFileMessageRequest_ToGroupId = regexp.MustCompile(`\d+`)
+
+func (this *SendFileMessageRequest) Validate() error {
+	if !(this.ToUserId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToUserId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToUserId))
+	}
+	if !(this.ToGroupId > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("ToGroupId", fmt.Errorf(`value '%v' must be greater than '0'`, this.ToGroupId))
+	}
+	if nil == this.File {
+		return github_com_mwitkow_go_proto_validators.FieldError("File", fmt.Errorf("message must exist"))
+	}
+	if this.File != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.File); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("File", err)
+		}
+	}
+	return nil
+}
+func (this *SendFileMessageResponse) Validate() error {
 	return nil
 }

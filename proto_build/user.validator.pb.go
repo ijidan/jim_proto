@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "github.com/golang/protobuf/ptypes/timestamp"
+	_ "github.com/mwitkow/go-proto-validators"
 	regexp "regexp"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
@@ -62,6 +62,9 @@ func (this *CreateUserResponse) Validate() error {
 	}
 	return nil
 }
+
+var _regex_GetUserRequest_Id = regexp.MustCompile(`\d+`)
+
 func (this *GetUserRequest) Validate() error {
 	if !(this.Id > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
@@ -76,6 +79,10 @@ func (this *GetUserResponse) Validate() error {
 	}
 	return nil
 }
+
+var _regex_QueryUserRequest_Page = regexp.MustCompile(`\d+`)
+var _regex_QueryUserRequest_PageSize = regexp.MustCompile(`\d`)
+
 func (this *QueryUserRequest) Validate() error {
 	if !(this.Page > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Page", fmt.Errorf(`value '%v' must be greater than '0'`, this.Page))
@@ -98,5 +105,49 @@ func (this *QueryUserResponse) Validate() error {
 			}
 		}
 	}
+	return nil
+}
+
+var _regex_UserLoginRequest_Nickname = regexp.MustCompile(`^[a-z0-9]{2,30}$`)
+var _regex_UserLoginRequest_Password = regexp.MustCompile(`^[a-z][a-z0-9]{1,17}$`)
+
+func (this *UserLoginRequest) Validate() error {
+	if !_regex_UserLoginRequest_Nickname.MatchString(this.Nickname) {
+		return github_com_mwitkow_go_proto_validators.FieldError("Nickname", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z0-9]{2,30}$"`, this.Nickname))
+	}
+	if !_regex_UserLoginRequest_Password.MatchString(this.Password) {
+		return github_com_mwitkow_go_proto_validators.FieldError("Password", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z][a-z0-9]{1,17}$"`, this.Password))
+	}
+	return nil
+}
+func (this *UserLoginResponse) Validate() error {
+	return nil
+}
+
+var _regex_UpdateAvatarRequest_Url = regexp.MustCompile(`^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|png)$`)
+
+func (this *UpdateAvatarRequest) Validate() error {
+	if !_regex_UpdateAvatarRequest_Url.MatchString(this.Url) {
+		return github_com_mwitkow_go_proto_validators.FieldError("Url", fmt.Errorf(`value '%v' must be a string conforming to regex "^https?://(?:[a-z0-9\\-]+\\.)+[a-z]{2,6}(?:/[^/#?]+)+\\.(?:jpg|gif|png)$"`, this.Url))
+	}
+	return nil
+}
+func (this *UpdateAvatarResponse) Validate() error {
+	return nil
+}
+
+var _regex_UpdatePasswordRequest_Password = regexp.MustCompile(`^[a-z][a-z0-9]{1,17}$`)
+var _regex_UpdatePasswordRequest_PasswordRpt = regexp.MustCompile(`^[a-z][a-z0-9]{1,17}$`)
+
+func (this *UpdatePasswordRequest) Validate() error {
+	if !_regex_UpdatePasswordRequest_Password.MatchString(this.Password) {
+		return github_com_mwitkow_go_proto_validators.FieldError("Password", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z][a-z0-9]{1,17}$"`, this.Password))
+	}
+	if !_regex_UpdatePasswordRequest_PasswordRpt.MatchString(this.PasswordRpt) {
+		return github_com_mwitkow_go_proto_validators.FieldError("PasswordRpt", fmt.Errorf(`value '%v' must be a string conforming to regex "^[a-z][a-z0-9]{1,17}$"`, this.PasswordRpt))
+	}
+	return nil
+}
+func (this *UpdatePasswordResponse) Validate() error {
 	return nil
 }
