@@ -5,7 +5,6 @@ option go_package = "proto_build/;proto_build";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
-import "common.proto";
 
 message Group{
   uint64 id = 1;
