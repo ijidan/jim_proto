@@ -3,7 +3,8 @@ package message;
 option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
-import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+//import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+import "github.com/envoyproxy/protoc-gen-validate@v0.6.3/validate/validate.proto";
 
 //消息类型
 enum MESSAGE_TYPE {
@@ -107,8 +108,8 @@ message VideoMessage{
 }
 
 message SendUserTextMessageRequest{
-  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  TextMessage text=2 [(validator.field) = {msg_exists:true}];
+  uint64 to_user_id = 1 [(validate.rules).uint64 = {gt:0}];
+  TextMessage text = 2 [(validate.rules).message = {required:true}];
 }
 
 message SendUserTextMessageResponse{
@@ -116,8 +117,8 @@ message SendUserTextMessageResponse{
 }
 
 message SendUserLocationMessageRequest{
-  uint64 to_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  LocationMessage location = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_user_id = 2  [(validate.rules).uint64 = {gt:0}];
+  LocationMessage location = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendUserLocationMessageResponse{
@@ -125,8 +126,8 @@ message SendUserLocationMessageResponse{
 }
 
 message SendUserFaceMessageRequest{
-  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  FaceMessage face = 2 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_user_id = 1 [(validate.rules).uint64 = {gt:0}];
+  FaceMessage face = 2 [(validate.rules).message = {required:true}] ;
 }
 
 message SendUserFaceMessageResponse{
@@ -134,8 +135,8 @@ message SendUserFaceMessageResponse{
 }
 
 message SendUserSoundMessageRequest{
-  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  SoundMessage sound = 2 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_user_id = 1 [(validate.rules).uint64 = {gt:0}];
+  SoundMessage sound = 2 [(validate.rules).message = {required:true}] ;
 }
 
 message SendUserSoundMessageResponse{
@@ -143,8 +144,8 @@ message SendUserSoundMessageResponse{
 }
 
 message SendUserVideoMessageRequest{
-  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  VideoMessage video = 2 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_user_id = 1 [(validate.rules).uint64 = {gt:0}];
+  VideoMessage video = 2 [(validate.rules).message = {required:true}] ;
 }
 
 message SendUserVideoMessageResponse{
@@ -152,8 +153,8 @@ message SendUserVideoMessageResponse{
 }
 
 message SendUserImageMessageRequest{
-  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  ImageMessageItem image = 2 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_user_id = 1 [(validate.rules).uint64 = {gt:0}];
+  ImageMessageItem image = 2 [(validate.rules).message = {required:true}] ;
 }
 
 message SendUserImageMessageResponse{
@@ -161,8 +162,8 @@ message SendUserImageMessageResponse{
 }
 
 message SendUserFileMessageRequest{
-  uint64 to_user_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  FileMessage file = 2 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_user_id = 1 [(validate.rules).uint64 = {gt:0}];
+  FileMessage file = 2 [(validate.rules).message = {required:true}] ;
 }
 
 message SendUserFileMessageResponse{
@@ -171,9 +172,9 @@ message SendUserFileMessageResponse{
 
 
 message SendGroupTextMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  string content = 3  [(validator.field) = {msg_exists:true}];
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  TextMessage text = 3  [(validate.rules).message = {required:true}];
 }
 
 message SendGroupTextMessageResponse{
@@ -181,9 +182,9 @@ message SendGroupTextMessageResponse{
 }
 
 message SendGroupLocationMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  LocationMessage location = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  LocationMessage location = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupLocationMessageResponse{
@@ -191,9 +192,9 @@ message SendGroupLocationMessageResponse{
 }
 
 message SendGroupFaceMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  FaceMessage face = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  FaceMessage face = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupFaceMessageResponse{
@@ -201,9 +202,9 @@ message SendGroupFaceMessageResponse{
 }
 
 message SendGroupSoundMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  SoundMessage sound = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  SoundMessage sound = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupSoundMessageResponse{
@@ -211,9 +212,9 @@ message SendGroupSoundMessageResponse{
 }
 
 message SendGroupVideoMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  VideoMessage video = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  VideoMessage video = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupVideoMessageResponse{
@@ -221,9 +222,9 @@ message SendGroupVideoMessageResponse{
 }
 
 message SendGroupImageMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  ImageMessageItem image = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  ImageMessageItem image = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupImageMessageResponse{
@@ -231,9 +232,9 @@ message SendGroupImageMessageResponse{
 }
 
 message SendGroupFileMessageRequest{
-  uint64 to_group_id = 1 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  repeated uint64 at_user_id = 2 [(validator.field) = {regex:"\\d+",int_gt: 0}];
-  FaceMessage file = 3 [(validator.field) = {msg_exists:true}] ;
+  uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
+  repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
+  FaceMessage file = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupFileMessageResponse{

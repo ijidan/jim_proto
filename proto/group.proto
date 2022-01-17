@@ -4,15 +4,35 @@ option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+//import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+import "github.com/envoyproxy/protoc-gen-validate@v0.6.3/validate/validate.proto";
 
 message Group{
   uint64 id = 1;
   string name = 2;
   string introduction = 3;
-  string extra = 4;
-  uint64 user_id=5;
-  google.protobuf.Timestamp created_at = 6;
-  google.protobuf.Timestamp updated_at = 7;
-  google.protobuf.Timestamp deleted_at = 8;
+  string avatar_url = 4;
+  string extra = 5;
+  uint64 user_id = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  google.protobuf.Timestamp deleted_at = 9;
 }
+
+message CreateGroupRequest{
+  string name = 1 [(validate.rules).string = {pattern: "^[a-z0-9]{2,30}$"}];
+  string introduction = 2 [(validate.rules).string = {ignore_empty:true,pattern: "^\\s{2,30}$"}];
+  string avatar_url = 3 [(validate.rules).string = {uri: true,prefix:"jpg" "png" "jpeg"}];
+}
+
+message CreateGroupResponse{
+  Group group = 1;
+}
+
+message UpdateGroupRequest{
+  uint64 id = 1 [(validate.rules).uint64 = {gt:0}];
+  string name = 2 [(validate.rules).string = {pattern: "^[a-z0-9]{2,30}$"}];
+  string introduction = 3 [(validate.rules).string = {ignore_empty:true,pattern: "^\\s{2,30}$"}];
+  string avatar_url = 4 [(validate.rules).string = {uri: true,prefix:"jpg" "png" "jpeg"}];
+}
+

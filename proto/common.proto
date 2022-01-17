@@ -3,7 +3,8 @@ package common;
 option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
-import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+//import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
+import "github.com/envoyproxy/protoc-gen-validate@v0.6.3/validate/validate.proto";
 
 enum Gender{
   Unknown = 0; //未知
@@ -12,11 +13,11 @@ enum Gender{
 }
 
 message ImageInfo{
-  string name = 1  [(validator.field) = {msg_exists :true}];
+  string name = 1  [(validate.rules).string = {min_len :1}];
   string type = 2;
   string url = 3;
-  uint64 width = 4  [(validator.field) = {int_gt: 0}];
-  uint64 height = 5  [(validator.field) = {int_gt: 0}];
+  uint64 width = 4  [(validate.rules).uint64 = {gt: 0}];
+  uint64 height = 5  [(validate.rules).uint64 = {gt: 0}];
 }
 
 message Pager{
@@ -33,11 +34,11 @@ message CommonResponse{
 }
 
 message UploadImageRequest{
-  bytes content=1 [(validator.field) = {msg_exists:true}];;
+  bytes content = 1 [(validate.rules).bytes = {min_len:1}];
 }
 
 message UploadImageResponse{
-  string url=1;
+  string url = 1;
 }
 
 service CommonService{
