@@ -2,6 +2,7 @@ syntax = "proto3";
 package message;
 option go_package = "proto_build/;proto_build";
 
+
 import "google/api/annotations.proto";
 //import "github.com/mwitkow/go-proto-validators@v0.3.2/validator.proto";
 import "github.com/envoyproxy/protoc-gen-validate@v0.6.3/validate/validate.proto";
@@ -234,7 +235,7 @@ message SendGroupImageMessageResponse{
 message SendGroupFileMessageRequest{
   uint64 to_group_id = 1 [(validate.rules).uint64 = {gt:0}];
   repeated uint64 at_user_id = 2 [(validate.rules).repeated.items.uint64 = {gt:0}];
-  FaceMessage file = 3 [(validate.rules).message = {required:true}] ;
+  FileMessage file = 3 [(validate.rules).message = {required:true}] ;
 }
 
 message SendGroupFileMessageResponse{
