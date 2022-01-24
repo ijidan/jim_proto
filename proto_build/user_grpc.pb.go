@@ -20,8 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 type UserServiceClient interface {
 	CreateUser(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
 	UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
-	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
-	QueryUser(ctx context.Context, in *QueryUserRequest, opts ...grpc.CallOption) (*QueryUserResponse, error)
+	GetUser(ctx context.Context, in *UserGetRequest, opts ...grpc.CallOption) (*UserGetResponse, error)
+	QueryUser(ctx context.Context, in *UserQueryRequest, opts ...grpc.CallOption) (*UserQueryResponse, error)
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
 	UpdateAvatar(ctx context.Context, in *UpdateAvatarRequest, opts ...grpc.CallOption) (*UpdateAvatarResponse, error)
 }
@@ -52,8 +52,8 @@ func (c *userServiceClient) UserLogin(ctx context.Context, in *UserLoginRequest,
 	return out, nil
 }
 
-func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
-	out := new(GetUserResponse)
+func (c *userServiceClient) GetUser(ctx context.Context, in *UserGetRequest, opts ...grpc.CallOption) (*UserGetResponse, error) {
+	out := new(UserGetResponse)
 	err := c.cc.Invoke(ctx, "/user.UserService/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opt
 	return out, nil
 }
 
-func (c *userServiceClient) QueryUser(ctx context.Context, in *QueryUserRequest, opts ...grpc.CallOption) (*QueryUserResponse, error) {
-	out := new(QueryUserResponse)
+func (c *userServiceClient) QueryUser(ctx context.Context, in *UserQueryRequest, opts ...grpc.CallOption) (*UserQueryResponse, error) {
+	out := new(UserQueryResponse)
 	err := c.cc.Invoke(ctx, "/user.UserService/QueryUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -94,8 +94,8 @@ func (c *userServiceClient) UpdateAvatar(ctx context.Context, in *UpdateAvatarRe
 type UserServiceServer interface {
 	CreateUser(context.Context, *UserCreateRequest) (*UserCreateResponse, error)
 	UserLogin(context.Context, *UserLoginRequest) (*UserLoginResponse, error)
-	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	QueryUser(context.Context, *QueryUserRequest) (*QueryUserResponse, error)
+	GetUser(context.Context, *UserGetRequest) (*UserGetResponse, error)
+	QueryUser(context.Context, *UserQueryRequest) (*UserQueryResponse, error)
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	UpdateAvatar(context.Context, *UpdateAvatarRequest) (*UpdateAvatarResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
@@ -111,10 +111,10 @@ func (UnimplementedUserServiceServer) CreateUser(context.Context, *UserCreateReq
 func (UnimplementedUserServiceServer) UserLogin(context.Context, *UserLoginRequest) (*UserLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserLogin not implemented")
 }
-func (UnimplementedUserServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+func (UnimplementedUserServiceServer) GetUser(context.Context, *UserGetRequest) (*UserGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedUserServiceServer) QueryUser(context.Context, *QueryUserRequest) (*QueryUserResponse, error) {
+func (UnimplementedUserServiceServer) QueryUser(context.Context, *UserQueryRequest) (*UserQueryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryUser not implemented")
 }
 func (UnimplementedUserServiceServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error) {
@@ -173,7 +173,7 @@ func _UserService_UserLogin_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserRequest)
+	in := new(UserGetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -185,13 +185,13 @@ func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/user.UserService/GetUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetUser(ctx, req.(*GetUserRequest))
+		return srv.(UserServiceServer).GetUser(ctx, req.(*UserGetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_QueryUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryUserRequest)
+	in := new(UserQueryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -203,7 +203,7 @@ func _UserService_QueryUser_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/user.UserService/QueryUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).QueryUser(ctx, req.(*QueryUserRequest))
+		return srv.(UserServiceServer).QueryUser(ctx, req.(*UserQueryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

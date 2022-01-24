@@ -31,21 +31,21 @@ message UserCreateResponse{
   User user = 1;
 }
 
-message GetUserRequest{
+message UserGetRequest{
   uint64 id = 1 [(validate.rules).uint64 = {gt:0}];
 }
 
-message GetUserResponse{
+message UserGetResponse{
   User user = 1;
 }
 
-message QueryUserRequest{
+message UserQueryRequest{
   string keyword = 1;
   uint64 page = 2 [(validate.rules).uint64 = {gt:0}];
   uint64 page_size = 3 [(validate.rules).uint64 = {gt:0}];
 }
 
-message QueryUserResponse{
+message UserQueryResponse{
   common.Pager pager = 1;
   repeated User user = 2;
 }
@@ -90,13 +90,13 @@ service UserService{
     };
   }
 
-  rpc GetUser(GetUserRequest) returns(GetUserResponse){
+  rpc GetUser(UserGetRequest) returns(UserGetResponse){
     option(google.api.http) = {
       get:"/v1/api/user/{id}"
     };
   }
 
-  rpc QueryUser(QueryUserRequest)returns(QueryUserResponse){
+  rpc QueryUser(UserQueryRequest)returns(UserQueryResponse){
     option(google.api.http) = {
       get:"/v1/api/user"
     };

@@ -499,22 +499,6 @@
             <ul>
               
                 <li>
-                  <a href="#user.GetUserRequest"><span class="badge">M</span>GetUserRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#user.GetUserResponse"><span class="badge">M</span>GetUserResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#user.QueryUserRequest"><span class="badge">M</span>QueryUserRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#user.QueryUserResponse"><span class="badge">M</span>QueryUserResponse</a>
-                </li>
-              
-                <li>
                   <a href="#user.UpdateAvatarRequest"><span class="badge">M</span>UpdateAvatarRequest</a>
                 </li>
               
@@ -543,11 +527,27 @@
                 </li>
               
                 <li>
+                  <a href="#user.UserGetRequest"><span class="badge">M</span>UserGetRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#user.UserGetResponse"><span class="badge">M</span>UserGetResponse</a>
+                </li>
+              
+                <li>
                   <a href="#user.UserLoginRequest"><span class="badge">M</span>UserLoginRequest</a>
                 </li>
               
                 <li>
                   <a href="#user.UserLoginResponse"><span class="badge">M</span>UserLoginResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#user.UserQueryRequest"><span class="badge">M</span>UserQueryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#user.UserQueryResponse"><span class="badge">M</span>UserQueryResponse</a>
                 </li>
               
               
@@ -4229,7 +4229,7 @@
           <tbody>
             
               <tr>
-                <td>ping</td>
+                <td>Ping</td>
                 <td><a href="#ping.PingRequest">PingRequest</a></td>
                 <td><a href="#ping.PingResponse">PingResponse</a></td>
                 <td><p></p></td>
@@ -4256,7 +4256,7 @@
               
               
               <tr>
-                <td>ping</td>
+                <td>Ping</td>
                 <td>GET</td>
                 <td>/v1/api/ping</td>
                 <td></td>
@@ -4274,188 +4274,6 @@
       </div>
       <p></p>
 
-      
-        <h3 id="user.GetUserRequest">GetUserRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-            
-            
-            <h4>Validated Fields</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Field</td>
-                  <td>Validations</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td>
-                    <ul>
-                    
-                      <li>uint64.gt: 0</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
-          
-
-        
-      
-        <h3 id="user.GetUserResponse">GetUserResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>user</td>
-                  <td><a href="#user.User">User</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="user.QueryUserRequest">QueryUserRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>keyword</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>page</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>page_size</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-            
-            
-            <h4>Validated Fields</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Field</td>
-                  <td>Validations</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>page</td>
-                  <td>
-                    <ul>
-                    
-                      <li>uint64.gt: 0</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-                <tr>
-                  <td>page_size</td>
-                  <td>
-                    <ul>
-                    
-                      <li>uint64.gt: 0</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
-          
-
-        
-      
-        <h3 id="user.QueryUserResponse">QueryUserResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>pager</td>
-                  <td><a href="#common.Pager">common.Pager</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>user</td>
-                  <td><a href="#user.User">User</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
       
         <h3 id="user.UpdateAvatarRequest">UpdateAvatarRequest</h3>
         <p></p>
@@ -4815,6 +4633,81 @@
 
         
       
+        <h3 id="user.UserGetRequest">UserGetRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="user.UserGetResponse">UserGetResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user</td>
+                  <td><a href="#user.User">User</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="user.UserLoginRequest">UserLoginRequest</h3>
         <p></p>
 
@@ -4908,6 +4801,113 @@
 
         
       
+        <h3 id="user.UserQueryRequest">UserQueryRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>keyword</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>page</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="user.UserQueryResponse">UserQueryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>pager</td>
+                  <td><a href="#common.Pager">common.Pager</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user</td>
+                  <td><a href="#user.User">User</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -4938,15 +4938,15 @@
             
               <tr>
                 <td>GetUser</td>
-                <td><a href="#user.GetUserRequest">GetUserRequest</a></td>
-                <td><a href="#user.GetUserResponse">GetUserResponse</a></td>
+                <td><a href="#user.UserGetRequest">UserGetRequest</a></td>
+                <td><a href="#user.UserGetResponse">UserGetResponse</a></td>
                 <td><p></p></td>
               </tr>
             
               <tr>
                 <td>QueryUser</td>
-                <td><a href="#user.QueryUserRequest">QueryUserRequest</a></td>
-                <td><a href="#user.QueryUserResponse">QueryUserResponse</a></td>
+                <td><a href="#user.UserQueryRequest">UserQueryRequest</a></td>
+                <td><a href="#user.UserQueryResponse">UserQueryResponse</a></td>
                 <td><p></p></td>
               </tr>
             

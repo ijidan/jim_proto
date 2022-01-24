@@ -87,10 +87,6 @@
     - [PingService](#ping.PingService)
   
 - [user.proto](#user.proto)
-    - [GetUserRequest](#user.GetUserRequest)
-    - [GetUserResponse](#user.GetUserResponse)
-    - [QueryUserRequest](#user.QueryUserRequest)
-    - [QueryUserResponse](#user.QueryUserResponse)
     - [UpdateAvatarRequest](#user.UpdateAvatarRequest)
     - [UpdateAvatarResponse](#user.UpdateAvatarResponse)
     - [UpdatePasswordRequest](#user.UpdatePasswordRequest)
@@ -98,8 +94,12 @@
     - [User](#user.User)
     - [UserCreateRequest](#user.UserCreateRequest)
     - [UserCreateResponse](#user.UserCreateResponse)
+    - [UserGetRequest](#user.UserGetRequest)
+    - [UserGetResponse](#user.UserGetResponse)
     - [UserLoginRequest](#user.UserLoginRequest)
     - [UserLoginResponse](#user.UserLoginResponse)
+    - [UserQueryRequest](#user.UserQueryRequest)
+    - [UserQueryResponse](#user.UserQueryResponse)
   
     - [UserService](#user.UserService)
   
@@ -1253,7 +1253,7 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| ping | [PingRequest](#ping.PingRequest) | [PingResponse](#ping.PingResponse) |  |
+| Ping | [PingRequest](#ping.PingRequest) | [PingResponse](#ping.PingResponse) |  |
 
  
 
@@ -1263,69 +1263,6 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## user.proto
-
-
-
-<a name="user.GetUserRequest"></a>
-
-### GetUserRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [uint64](#uint64) |  |  |
-
-
-
-
-
-
-<a name="user.GetUserResponse"></a>
-
-### GetUserResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| user | [User](#user.User) |  |  |
-
-
-
-
-
-
-<a name="user.QueryUserRequest"></a>
-
-### QueryUserRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| keyword | [string](#string) |  |  |
-| page | [uint64](#uint64) |  |  |
-| page_size | [uint64](#uint64) |  |  |
-
-
-
-
-
-
-<a name="user.QueryUserResponse"></a>
-
-### QueryUserResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| pager | [common.Pager](#common.Pager) |  |  |
-| user | [User](#user.User) | repeated |  |
-
-
-
 
 
 
@@ -1436,6 +1373,36 @@
 
 
 
+<a name="user.UserGetRequest"></a>
+
+### UserGetRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.UserGetResponse"></a>
+
+### UserGetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user | [User](#user.User) |  |  |
+
+
+
+
+
+
 <a name="user.UserLoginRequest"></a>
 
 ### UserLoginRequest
@@ -1466,6 +1433,39 @@
 
 
 
+
+<a name="user.UserQueryRequest"></a>
+
+### UserQueryRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keyword | [string](#string) |  |  |
+| page | [uint64](#uint64) |  |  |
+| page_size | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.UserQueryResponse"></a>
+
+### UserQueryResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pager | [common.Pager](#common.Pager) |  |  |
+| user | [User](#user.User) | repeated |  |
+
+
+
+
+
  
 
  
@@ -1482,8 +1482,8 @@
 | ----------- | ------------ | ------------- | ------------|
 | createUser | [UserCreateRequest](#user.UserCreateRequest) | [UserCreateResponse](#user.UserCreateResponse) |  |
 | userLogin | [UserLoginRequest](#user.UserLoginRequest) | [UserLoginResponse](#user.UserLoginResponse) |  |
-| GetUser | [GetUserRequest](#user.GetUserRequest) | [GetUserResponse](#user.GetUserResponse) |  |
-| QueryUser | [QueryUserRequest](#user.QueryUserRequest) | [QueryUserResponse](#user.QueryUserResponse) |  |
+| GetUser | [UserGetRequest](#user.UserGetRequest) | [UserGetResponse](#user.UserGetResponse) |  |
+| QueryUser | [UserQueryRequest](#user.UserQueryRequest) | [UserQueryResponse](#user.UserQueryResponse) |  |
 | UpdatePassword | [UpdatePasswordRequest](#user.UpdatePasswordRequest) | [UpdatePasswordResponse](#user.UpdatePasswordResponse) |  |
 | UpdateAvatar | [UpdateAvatarRequest](#user.UpdateAvatarRequest) | [UpdateAvatarResponse](#user.UpdateAvatarResponse) |  |
 
