@@ -19,7 +19,7 @@ message User{
   google.protobuf.Timestamp deleted_at = 8;
 }
 
-message CreateUserRequest{
+message UserCreateRequest{
   string nickname = 1 [(validate.rules).string = {pattern: "^[a-z0-9]{2,30}$"}];
   common.Gender gender = 2 [(validate.rules).enum= {defined_only :true}];
   string avatar_url = 3 [(validate.rules).string = {uri: true,prefix:"jpg" "png" "jpeg"}];
@@ -27,7 +27,7 @@ message CreateUserRequest{
   string password_rpt = 5 [(validate.rules).string = {pattern:"^[a-z][a-z0-9]{1,17}$"}];
 }
 
-message CreateUserResponse{
+message UserCreateResponse{
   User user = 1;
 }
 
@@ -76,7 +76,7 @@ message UpdatePasswordResponse{
 
 service UserService{
 
-  rpc createUser(CreateUserRequest) returns(CreateUserResponse){
+  rpc createUser(UserCreateRequest) returns(UserCreateResponse){
     option (google.api.http) = {
       post: "/v1/api/user",
       body:"*"

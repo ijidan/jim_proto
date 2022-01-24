@@ -126,7 +126,7 @@ func (x *User) GetDeletedAt() *timestamp.Timestamp {
 	return nil
 }
 
-type CreateUserRequest struct {
+type UserCreateRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -138,8 +138,8 @@ type CreateUserRequest struct {
 	PasswordRpt string `protobuf:"bytes,5,opt,name=password_rpt,json=passwordRpt,proto3" json:"password_rpt,omitempty"`
 }
 
-func (x *CreateUserRequest) Reset() {
-	*x = CreateUserRequest{}
+func (x *UserCreateRequest) Reset() {
+	*x = UserCreateRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_user_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -147,13 +147,13 @@ func (x *CreateUserRequest) Reset() {
 	}
 }
 
-func (x *CreateUserRequest) String() string {
+func (x *UserCreateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateUserRequest) ProtoMessage() {}
+func (*UserCreateRequest) ProtoMessage() {}
 
-func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
+func (x *UserCreateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -165,47 +165,47 @@ func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
-func (*CreateUserRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserCreateRequest.ProtoReflect.Descriptor instead.
+func (*UserCreateRequest) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateUserRequest) GetNickname() string {
+func (x *UserCreateRequest) GetNickname() string {
 	if x != nil {
 		return x.Nickname
 	}
 	return ""
 }
 
-func (x *CreateUserRequest) GetGender() Gender {
+func (x *UserCreateRequest) GetGender() Gender {
 	if x != nil {
 		return x.Gender
 	}
 	return Gender_Unknown
 }
 
-func (x *CreateUserRequest) GetAvatarUrl() string {
+func (x *UserCreateRequest) GetAvatarUrl() string {
 	if x != nil {
 		return x.AvatarUrl
 	}
 	return ""
 }
 
-func (x *CreateUserRequest) GetPassword() string {
+func (x *UserCreateRequest) GetPassword() string {
 	if x != nil {
 		return x.Password
 	}
 	return ""
 }
 
-func (x *CreateUserRequest) GetPasswordRpt() string {
+func (x *UserCreateRequest) GetPasswordRpt() string {
 	if x != nil {
 		return x.PasswordRpt
 	}
 	return ""
 }
 
-type CreateUserResponse struct {
+type UserCreateResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -213,8 +213,8 @@ type CreateUserResponse struct {
 	User *User `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 }
 
-func (x *CreateUserResponse) Reset() {
-	*x = CreateUserResponse{}
+func (x *UserCreateResponse) Reset() {
+	*x = UserCreateResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_user_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -222,13 +222,13 @@ func (x *CreateUserResponse) Reset() {
 	}
 }
 
-func (x *CreateUserResponse) String() string {
+func (x *UserCreateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateUserResponse) ProtoMessage() {}
+func (*UserCreateResponse) ProtoMessage() {}
 
-func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
+func (x *UserCreateResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -240,12 +240,12 @@ func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateUserResponse.ProtoReflect.Descriptor instead.
-func (*CreateUserResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserCreateResponse.ProtoReflect.Descriptor instead.
+func (*UserCreateResponse) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CreateUserResponse) GetUser() *User {
+func (x *UserCreateResponse) GetUser() *User {
 	if x != nil {
 		return x.User
 	}
@@ -778,7 +778,7 @@ var file_user_proto_rawDesc = []byte{
 	0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
 	0x70, 0x52, 0x09, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xaa, 0x02, 0x0a,
-	0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x11, 0x55, 0x73, 0x65, 0x72, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x33, 0x0a, 0x08, 0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x42, 0x17, 0xfa, 0x42, 0x14, 0x72, 0x12, 0x32, 0x10, 0x5e, 0x5b, 0x61,
 	0x2d, 0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x7b, 0x32, 0x2c, 0x33, 0x30, 0x7d, 0x24, 0x52, 0x08, 0x6e,
@@ -796,8 +796,8 @@ var file_user_proto_rawDesc = []byte{
 	0x77, 0x6f, 0x72, 0x64, 0x5f, 0x72, 0x70, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x42, 0x1c,
 	0xfa, 0x42, 0x19, 0x72, 0x17, 0x32, 0x15, 0x5e, 0x5b, 0x61, 0x2d, 0x7a, 0x5d, 0x5b, 0x61, 0x2d,
 	0x7a, 0x30, 0x2d, 0x39, 0x5d, 0x7b, 0x31, 0x2c, 0x31, 0x37, 0x7d, 0x24, 0x52, 0x0b, 0x70, 0x61,
-	0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x70, 0x74, 0x22, 0x34, 0x0a, 0x12, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x70, 0x74, 0x22, 0x34, 0x0a, 0x12, 0x55, 0x73, 0x65,
+	0x72, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
 	0x1e, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e,
 	0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x22,
 	0x29, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
@@ -848,9 +848,9 @@ var file_user_proto_rawDesc = []byte{
 	0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xbe, 0x04,
 	0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x58, 0x0a,
 	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x17, 0x2e, 0x75, 0x73,
-	0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x17,
+	0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x17,
 	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x11, 0x22, 0x0c, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x70, 0x69, 0x2f,
 	0x75, 0x73, 0x65, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0x5b, 0x0a, 0x09, 0x75, 0x73, 0x65, 0x72, 0x4c,
 	0x6f, 0x67, 0x69, 0x6e, 0x12, 0x16, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72,
@@ -902,8 +902,8 @@ func file_user_proto_rawDescGZIP() []byte {
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_user_proto_goTypes = []interface{}{
 	(*User)(nil),                   // 0: user.User
-	(*CreateUserRequest)(nil),      // 1: user.CreateUserRequest
-	(*CreateUserResponse)(nil),     // 2: user.CreateUserResponse
+	(*UserCreateRequest)(nil),      // 1: user.UserCreateRequest
+	(*UserCreateResponse)(nil),     // 2: user.UserCreateResponse
 	(*GetUserRequest)(nil),         // 3: user.GetUserRequest
 	(*GetUserResponse)(nil),        // 4: user.GetUserResponse
 	(*QueryUserRequest)(nil),       // 5: user.QueryUserRequest
@@ -923,18 +923,18 @@ var file_user_proto_depIdxs = []int32{
 	14, // 1: user.User.created_at:type_name -> google.protobuf.Timestamp
 	14, // 2: user.User.updated_at:type_name -> google.protobuf.Timestamp
 	14, // 3: user.User.deleted_at:type_name -> google.protobuf.Timestamp
-	13, // 4: user.CreateUserRequest.gender:type_name -> common.Gender
-	0,  // 5: user.CreateUserResponse.user:type_name -> user.User
+	13, // 4: user.UserCreateRequest.gender:type_name -> common.Gender
+	0,  // 5: user.UserCreateResponse.user:type_name -> user.User
 	0,  // 6: user.GetUserResponse.user:type_name -> user.User
 	15, // 7: user.QueryUserResponse.pager:type_name -> common.Pager
 	0,  // 8: user.QueryUserResponse.user:type_name -> user.User
-	1,  // 9: user.UserService.createUser:input_type -> user.CreateUserRequest
+	1,  // 9: user.UserService.createUser:input_type -> user.UserCreateRequest
 	7,  // 10: user.UserService.userLogin:input_type -> user.UserLoginRequest
 	3,  // 11: user.UserService.GetUser:input_type -> user.GetUserRequest
 	5,  // 12: user.UserService.QueryUser:input_type -> user.QueryUserRequest
 	11, // 13: user.UserService.UpdatePassword:input_type -> user.UpdatePasswordRequest
 	9,  // 14: user.UserService.UpdateAvatar:input_type -> user.UpdateAvatarRequest
-	2,  // 15: user.UserService.createUser:output_type -> user.CreateUserResponse
+	2,  // 15: user.UserService.createUser:output_type -> user.UserCreateResponse
 	8,  // 16: user.UserService.userLogin:output_type -> user.UserLoginResponse
 	4,  // 17: user.UserService.GetUser:output_type -> user.GetUserResponse
 	6,  // 18: user.UserService.QueryUser:output_type -> user.QueryUserResponse
@@ -967,7 +967,7 @@ func file_user_proto_init() {
 			}
 		}
 		file_user_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateUserRequest); i {
+			switch v := v.(*UserCreateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -979,7 +979,7 @@ func file_user_proto_init() {
 			}
 		}
 		file_user_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateUserResponse); i {
+			switch v := v.(*UserCreateResponse); i {
 			case 0:
 				return &v.state
 			case 1:
