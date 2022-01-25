@@ -28,8 +28,8 @@ message TextMessage{
 message LocationMessage{
   uint64 id = 1;
   string cover_image = 2;
-  float lat = 3;
-  float lng = 4;
+  double lat = 3;
+  double lng = 4;
   string map_link = 5;
   string desc = 6;
 }

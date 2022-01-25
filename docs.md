@@ -605,8 +605,8 @@
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  |  |
 | cover_image | [string](#string) |  |  |
-| lat | [float](#float) |  |  |
-| lng | [float](#float) |  |  |
+| lat | [double](#double) |  |  |
+| lng | [double](#double) |  |  |
 | map_link | [string](#string) |  |  |
 | desc | [string](#string) |  |  |
 
