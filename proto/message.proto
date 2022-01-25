@@ -258,7 +258,7 @@ service MessageService {
     };
   }
 
-  rpc SendUserFceMessage(SendUserFaceMessageRequest) returns(SendUserFaceMessageResponse){
+  rpc SendUserFaceMessage(SendUserFaceMessageRequest) returns(SendUserFaceMessageResponse){
     option (google.api.http) = {
       post: "/v1/api/message/face/user",
       body:"*"

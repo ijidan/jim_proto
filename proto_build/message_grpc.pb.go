@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type MessageServiceClient interface {
 	SendUserTextMessage(ctx context.Context, in *SendUserTextMessageRequest, opts ...grpc.CallOption) (*SendUserTextMessageResponse, error)
 	SendUserLocationMessage(ctx context.Context, in *SendUserLocationMessageRequest, opts ...grpc.CallOption) (*SendUserLocationMessageResponse, error)
-	SendUserFceMessage(ctx context.Context, in *SendUserFaceMessageRequest, opts ...grpc.CallOption) (*SendUserFaceMessageResponse, error)
+	SendUserFaceMessage(ctx context.Context, in *SendUserFaceMessageRequest, opts ...grpc.CallOption) (*SendUserFaceMessageResponse, error)
 	SendUserSoundMessage(ctx context.Context, in *SendUserSoundMessageRequest, opts ...grpc.CallOption) (*SendUserSoundMessageResponse, error)
 	SendUserVideoMessage(ctx context.Context, in *SendUserVideoMessageRequest, opts ...grpc.CallOption) (*SendUserVideoMessageResponse, error)
 	SendUserImageMessage(ctx context.Context, in *SendUserImageMessageRequest, opts ...grpc.CallOption) (*SendUserImageMessageResponse, error)
@@ -60,9 +60,9 @@ func (c *messageServiceClient) SendUserLocationMessage(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *messageServiceClient) SendUserFceMessage(ctx context.Context, in *SendUserFaceMessageRequest, opts ...grpc.CallOption) (*SendUserFaceMessageResponse, error) {
+func (c *messageServiceClient) SendUserFaceMessage(ctx context.Context, in *SendUserFaceMessageRequest, opts ...grpc.CallOption) (*SendUserFaceMessageResponse, error) {
 	out := new(SendUserFaceMessageResponse)
-	err := c.cc.Invoke(ctx, "/message.MessageService/SendUserFceMessage", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/message.MessageService/SendUserFaceMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ func (c *messageServiceClient) SendGroupFileMessage(ctx context.Context, in *Sen
 type MessageServiceServer interface {
 	SendUserTextMessage(context.Context, *SendUserTextMessageRequest) (*SendUserTextMessageResponse, error)
 	SendUserLocationMessage(context.Context, *SendUserLocationMessageRequest) (*SendUserLocationMessageResponse, error)
-	SendUserFceMessage(context.Context, *SendUserFaceMessageRequest) (*SendUserFaceMessageResponse, error)
+	SendUserFaceMessage(context.Context, *SendUserFaceMessageRequest) (*SendUserFaceMessageResponse, error)
 	SendUserSoundMessage(context.Context, *SendUserSoundMessageRequest) (*SendUserSoundMessageResponse, error)
 	SendUserVideoMessage(context.Context, *SendUserVideoMessageRequest) (*SendUserVideoMessageResponse, error)
 	SendUserImageMessage(context.Context, *SendUserImageMessageRequest) (*SendUserImageMessageResponse, error)
@@ -199,8 +199,8 @@ func (UnimplementedMessageServiceServer) SendUserTextMessage(context.Context, *S
 func (UnimplementedMessageServiceServer) SendUserLocationMessage(context.Context, *SendUserLocationMessageRequest) (*SendUserLocationMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendUserLocationMessage not implemented")
 }
-func (UnimplementedMessageServiceServer) SendUserFceMessage(context.Context, *SendUserFaceMessageRequest) (*SendUserFaceMessageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendUserFceMessage not implemented")
+func (UnimplementedMessageServiceServer) SendUserFaceMessage(context.Context, *SendUserFaceMessageRequest) (*SendUserFaceMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendUserFaceMessage not implemented")
 }
 func (UnimplementedMessageServiceServer) SendUserSoundMessage(context.Context, *SendUserSoundMessageRequest) (*SendUserSoundMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendUserSoundMessage not implemented")
@@ -284,20 +284,20 @@ func _MessageService_SendUserLocationMessage_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MessageService_SendUserFceMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MessageService_SendUserFaceMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendUserFaceMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MessageServiceServer).SendUserFceMessage(ctx, in)
+		return srv.(MessageServiceServer).SendUserFaceMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/message.MessageService/SendUserFceMessage",
+		FullMethod: "/message.MessageService/SendUserFaceMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageServiceServer).SendUserFceMessage(ctx, req.(*SendUserFaceMessageRequest))
+		return srv.(MessageServiceServer).SendUserFaceMessage(ctx, req.(*SendUserFaceMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -516,8 +516,8 @@ var MessageService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MessageService_SendUserLocationMessage_Handler,
 		},
 		{
-			MethodName: "SendUserFceMessage",
-			Handler:    _MessageService_SendUserFceMessage_Handler,
+			MethodName: "SendUserFaceMessage",
+			Handler:    _MessageService_SendUserFaceMessage_Handler,
 		},
 		{
 			MethodName: "SendUserSoundMessage",

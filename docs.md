@@ -1191,7 +1191,7 @@
 | ----------- | ------------ | ------------- | ------------|
 | SendUserTextMessage | [SendUserTextMessageRequest](#message.SendUserTextMessageRequest) | [SendUserTextMessageResponse](#message.SendUserTextMessageResponse) |  |
 | SendUserLocationMessage | [SendUserLocationMessageRequest](#message.SendUserLocationMessageRequest) | [SendUserLocationMessageResponse](#message.SendUserLocationMessageResponse) |  |
-| SendUserFceMessage | [SendUserFaceMessageRequest](#message.SendUserFaceMessageRequest) | [SendUserFaceMessageResponse](#message.SendUserFaceMessageResponse) |  |
+| SendUserFaceMessage | [SendUserFaceMessageRequest](#message.SendUserFaceMessageRequest) | [SendUserFaceMessageResponse](#message.SendUserFaceMessageResponse) |  |
 | SendUserSoundMessage | [SendUserSoundMessageRequest](#message.SendUserSoundMessageRequest) | [SendUserSoundMessageResponse](#message.SendUserSoundMessageResponse) |  |
 | SendUserVideoMessage | [SendUserVideoMessageRequest](#message.SendUserVideoMessageRequest) | [SendUserVideoMessageResponse](#message.SendUserVideoMessageResponse) |  |
 | SendUserImageMessage | [SendUserImageMessageRequest](#message.SendUserImageMessageRequest) | [SendUserImageMessageResponse](#message.SendUserImageMessageResponse) |  |
