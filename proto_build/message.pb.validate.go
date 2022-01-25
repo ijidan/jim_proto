@@ -840,7 +840,7 @@ func (m *VideoMessage) validate(all bool) error {
 
 	// no validation rules for Size
 
-	// no validation rules for Second
+	// no validation rules for Seconds
 
 	// no validation rules for Url
 

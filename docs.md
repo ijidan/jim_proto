@@ -1100,7 +1100,7 @@
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  |  |
 | size | [uint64](#uint64) |  |  |
-| second | [uint64](#uint64) |  |  |
+| seconds | [uint64](#uint64) |  |  |
 | url | [string](#string) |  |  |
 | format | [string](#string) |  |  |
 | thumb_url | [string](#string) |  |  |

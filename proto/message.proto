@@ -98,7 +98,7 @@ enum VIDEO_FORMAT{
 message VideoMessage{
   uint64 id = 1;
   uint64 size = 2;
-  uint64 second = 3;
+  uint64 seconds = 3;
   string url = 4;
   string format = 5;
   string thumb_url = 6;
