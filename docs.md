@@ -1104,9 +1104,9 @@
 | url | [string](#string) |  |  |
 | format | [string](#string) |  |  |
 | thumb_url | [string](#string) |  |  |
-| thumb_size | [string](#string) |  |  |
-| thumb_width | [string](#string) |  |  |
-| thumb_height | [string](#string) |  |  |
+| thumb_size | [uint64](#uint64) |  |  |
+| thumb_width | [double](#double) |  |  |
+| thumb_height | [double](#double) |  |  |
 | thumb_format | [IMAGE_FORMAT](#message.IMAGE_FORMAT) |  |  |
 
 

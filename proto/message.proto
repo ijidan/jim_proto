@@ -102,9 +102,9 @@ message VideoMessage{
   string url = 4;
   string format = 5;
   string thumb_url = 6;
-  string thumb_size = 7;
-  string thumb_width = 8;
-  string thumb_height = 9;
+  uint64 thumb_size = 7;
+  double thumb_width = 8;
+  double thumb_height = 9;
   IMAGE_FORMAT thumb_format = 10;
 }
 
