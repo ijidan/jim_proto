@@ -255,7 +255,7 @@ func (m *UserCreateRequest) validate(all bool) error {
 	if !_UserCreateRequest_Nickname_Pattern.MatchString(m.GetNickname()) {
 		err := UserCreateRequestValidationError{
 			field:  "Nickname",
-			reason: "value does not match regex pattern \"^[a-z0-9]{2,30}$\"",
+			reason: "value does not match regex pattern \".{2,30}\"",
 		}
 		if !all {
 			return err
@@ -267,17 +267,6 @@ func (m *UserCreateRequest) validate(all bool) error {
 		err := UserCreateRequestValidationError{
 			field:  "Gender",
 			reason: "value must be one of the defined enum values",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if !strings.HasPrefix(m.GetAvatarUrl(), "jpgpngjpeg") {
-		err := UserCreateRequestValidationError{
-			field:  "AvatarUrl",
-			reason: "value does not have prefix \"jpgpngjpeg\"",
 		}
 		if !all {
 			return err
@@ -299,6 +288,17 @@ func (m *UserCreateRequest) validate(all bool) error {
 		err := UserCreateRequestValidationError{
 			field:  "AvatarUrl",
 			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_UserCreateRequest_AvatarUrl_Pattern.MatchString(m.GetAvatarUrl()) {
+		err := UserCreateRequestValidationError{
+			field:  "AvatarUrl",
+			reason: "value does not match regex pattern \"(jpg|jpeg|png)$\"",
 		}
 		if !all {
 			return err
@@ -408,7 +408,9 @@ var _ interface {
 	ErrorName() string
 } = UserCreateRequestValidationError{}
 
-var _UserCreateRequest_Nickname_Pattern = regexp.MustCompile("^[a-z0-9]{2,30}$")
+var _UserCreateRequest_Nickname_Pattern = regexp.MustCompile(".{2,30}")
+
+var _UserCreateRequest_AvatarUrl_Pattern = regexp.MustCompile("(jpg|jpeg|png)$")
 
 var _UserCreateRequest_Password_Pattern = regexp.MustCompile("^[a-z][a-z0-9]{1,17}$")
 
@@ -1099,7 +1101,7 @@ func (m *UserLoginRequest) validate(all bool) error {
 	if !_UserLoginRequest_Nickname_Pattern.MatchString(m.GetNickname()) {
 		err := UserLoginRequestValidationError{
 			field:  "Nickname",
-			reason: "value does not match regex pattern \"^[a-z0-9]{2,30}$\"",
+			reason: "value does not match regex pattern \".{2,30}\"",
 		}
 		if !all {
 			return err
@@ -1196,7 +1198,7 @@ var _ interface {
 	ErrorName() string
 } = UserLoginRequestValidationError{}
 
-var _UserLoginRequest_Nickname_Pattern = regexp.MustCompile("^[a-z0-9]{2,30}$")
+var _UserLoginRequest_Nickname_Pattern = regexp.MustCompile(".{2,30}")
 
 var _UserLoginRequest_Password_Pattern = regexp.MustCompile("^[a-z][a-z0-9]{1,17}$")
 
@@ -1326,17 +1328,6 @@ func (m *UpdateAvatarRequest) validate(all bool) error {
 
 	var errors []error
 
-	if !strings.HasPrefix(m.GetUrl(), "jpgpngjpeg") {
-		err := UpdateAvatarRequestValidationError{
-			field:  "Url",
-			reason: "value does not have prefix \"jpgpngjpeg\"",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if uri, err := url.Parse(m.GetUrl()); err != nil {
 		err = UpdateAvatarRequestValidationError{
 			field:  "Url",
@@ -1351,6 +1342,17 @@ func (m *UpdateAvatarRequest) validate(all bool) error {
 		err := UpdateAvatarRequestValidationError{
 			field:  "Url",
 			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_UpdateAvatarRequest_Url_Pattern.MatchString(m.GetUrl()) {
+		err := UpdateAvatarRequestValidationError{
+			field:  "Url",
+			reason: "value does not match regex pattern \"(jpg|jpeg|png)$\"",
 		}
 		if !all {
 			return err
@@ -1437,6 +1439,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateAvatarRequestValidationError{}
+
+var _UpdateAvatarRequest_Url_Pattern = regexp.MustCompile("(jpg|jpeg|png)$")
 
 // Validate checks the field values on UpdateAvatarResponse with the rules
 // defined in the proto definition for this message. If any rules are

@@ -280,17 +280,6 @@ func (m *CreateGroupRequest) validate(all bool) error {
 
 	}
 
-	if !strings.HasPrefix(m.GetAvatarUrl(), "jpgpngjpeg") {
-		err := CreateGroupRequestValidationError{
-			field:  "AvatarUrl",
-			reason: "value does not have prefix \"jpgpngjpeg\"",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if uri, err := url.Parse(m.GetAvatarUrl()); err != nil {
 		err = CreateGroupRequestValidationError{
 			field:  "AvatarUrl",
@@ -305,6 +294,17 @@ func (m *CreateGroupRequest) validate(all bool) error {
 		err := CreateGroupRequestValidationError{
 			field:  "AvatarUrl",
 			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_CreateGroupRequest_AvatarUrl_Pattern.MatchString(m.GetAvatarUrl()) {
+		err := CreateGroupRequestValidationError{
+			field:  "AvatarUrl",
+			reason: "value does not match regex pattern \"(jpg|jpeg|png)$\"",
 		}
 		if !all {
 			return err
@@ -395,6 +395,8 @@ var _ interface {
 var _CreateGroupRequest_Name_Pattern = regexp.MustCompile("^[a-z0-9]{2,30}$")
 
 var _CreateGroupRequest_Introduction_Pattern = regexp.MustCompile("^\\s{2,30}$")
+
+var _CreateGroupRequest_AvatarUrl_Pattern = regexp.MustCompile("(jpg|jpeg|png)$")
 
 // Validate checks the field values on CreateGroupResponse with the rules
 // defined in the proto definition for this message. If any rules are
@@ -592,17 +594,6 @@ func (m *UpdateGroupRequest) validate(all bool) error {
 
 	if m.GetAvatarUrl() != "" {
 
-		if !strings.HasPrefix(m.GetAvatarUrl(), "jpgpngjpeg") {
-			err := UpdateGroupRequestValidationError{
-				field:  "AvatarUrl",
-				reason: "value does not have prefix \"jpgpngjpeg\"",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
 		if uri, err := url.Parse(m.GetAvatarUrl()); err != nil {
 			err = UpdateGroupRequestValidationError{
 				field:  "AvatarUrl",
@@ -617,6 +608,17 @@ func (m *UpdateGroupRequest) validate(all bool) error {
 			err := UpdateGroupRequestValidationError{
 				field:  "AvatarUrl",
 				reason: "value must be absolute",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if !_UpdateGroupRequest_AvatarUrl_Pattern.MatchString(m.GetAvatarUrl()) {
+			err := UpdateGroupRequestValidationError{
+				field:  "AvatarUrl",
+				reason: "value does not match regex pattern \"(jpg|jpeg|png)$\"",
 			}
 			if !all {
 				return err
@@ -709,6 +711,8 @@ var _ interface {
 var _UpdateGroupRequest_Name_Pattern = regexp.MustCompile("^[a-z0-9]{2,30}$")
 
 var _UpdateGroupRequest_Introduction_Pattern = regexp.MustCompile("^\\s{2,30}$")
+
+var _UpdateGroupRequest_AvatarUrl_Pattern = regexp.MustCompile("(jpg|jpeg|png)$")
 
 // Validate checks the field values on UpdateGroupResponse with the rules
 // defined in the proto definition for this message. If any rules are

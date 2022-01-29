@@ -7,6 +7,10 @@
     - [CommonResponse](#common.CommonResponse)
     - [ImageInfo](#common.ImageInfo)
     - [Pager](#common.Pager)
+    - [SendEmailRequest](#common.SendEmailRequest)
+    - [SendEmailRequest.CcEntry](#common.SendEmailRequest.CcEntry)
+    - [SendEmailRequest.ReceiverEntry](#common.SendEmailRequest.ReceiverEntry)
+    - [SendEmailResponse](#common.SendEmailResponse)
     - [UploadImageRequest](#common.UploadImageRequest)
     - [UploadImageResponse](#common.UploadImageResponse)
   
@@ -168,6 +172,66 @@
 
 
 
+<a name="common.SendEmailRequest"></a>
+
+### SendEmailRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| receiver | [SendEmailRequest.ReceiverEntry](#common.SendEmailRequest.ReceiverEntry) | repeated |  |
+| cc | [SendEmailRequest.CcEntry](#common.SendEmailRequest.CcEntry) | repeated |  |
+| subject | [string](#string) |  |  |
+| content | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="common.SendEmailRequest.CcEntry"></a>
+
+### SendEmailRequest.CcEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="common.SendEmailRequest.ReceiverEntry"></a>
+
+### SendEmailRequest.ReceiverEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="common.SendEmailResponse"></a>
+
+### SendEmailResponse
+
+
+
+
+
+
+
 <a name="common.UploadImageRequest"></a>
 
 ### UploadImageRequest
@@ -225,6 +289,7 @@
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | UploadImage | [UploadImageRequest](#common.UploadImageRequest) stream | [UploadImageResponse](#common.UploadImageResponse) |  |
+| SendEmail | [SendEmailRequest](#common.SendEmailRequest) | [SendEmailResponse](#common.SendEmailResponse) |  |
 
  
 

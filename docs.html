@@ -191,6 +191,22 @@
                 </li>
               
                 <li>
+                  <a href="#common.SendEmailRequest"><span class="badge">M</span>SendEmailRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#common.SendEmailRequest.CcEntry"><span class="badge">M</span>SendEmailRequest.CcEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#common.SendEmailRequest.ReceiverEntry"><span class="badge">M</span>SendEmailRequest.ReceiverEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#common.SendEmailResponse"><span class="badge">M</span>SendEmailResponse</a>
+                </li>
+              
+                <li>
                   <a href="#common.UploadImageRequest"><span class="badge">M</span>UploadImageRequest</a>
                 </li>
               
@@ -756,6 +772,192 @@
 
         
       
+        <h3 id="common.SendEmailRequest">SendEmailRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>receiver</td>
+                  <td><a href="#common.SendEmailRequest.ReceiverEntry">SendEmailRequest.ReceiverEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cc</td>
+                  <td><a href="#common.SendEmailRequest.CcEntry">SendEmailRequest.CcEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subject</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>receiver</td>
+                  <td>
+                    <ul>
+                    
+                      <li>map.min_pairs: 1</li>
+                    
+                      <li>map.max_pairs: 500</li>
+                    
+                      <li>map.values.string.email: true</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>cc</td>
+                  <td>
+                    <ul>
+                    
+                      <li>map.min_pairs: 0</li>
+                    
+                      <li>map.max_pairs: 500</li>
+                    
+                      <li>map.values.string.email: true</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>subject</td>
+                  <td>
+                    <ul>
+                    
+                      <li>string.min_len: 1</li>
+                    
+                      <li>string.max_len: 50</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td>
+                    <ul>
+                    
+                      <li>string.min_len: 1</li>
+                    
+                      <li>string.max_len: 2000</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="common.SendEmailRequest.CcEntry">SendEmailRequest.CcEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="common.SendEmailRequest.ReceiverEntry">SendEmailRequest.ReceiverEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="common.SendEmailResponse">SendEmailResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="common.UploadImageRequest">UploadImageRequest</h3>
         <p></p>
 
@@ -881,6 +1083,13 @@
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>SendEmail</td>
+                <td><a href="#common.SendEmailRequest">SendEmailRequest</a></td>
+                <td><a href="#common.SendEmailResponse">SendEmailResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -905,6 +1114,16 @@
                 <td>UploadImage</td>
                 <td>POST</td>
                 <td>/v1/api/common/image</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SendEmail</td>
+                <td>POST</td>
+                <td>/v1/api/common/email</td>
                 <td>*</td>
               </tr>
               
@@ -997,7 +1216,7 @@
                   <td>
                     <ul>
                     
-                      <li>string.prefix: jpgpngjpeg</li>
+                      <li>string.pattern: (jpg|jpeg|png)$</li>
                     
                       <li>string.uri: true</li>
                     
@@ -1722,7 +1941,7 @@
                   <td>
                     <ul>
                     
-                      <li>string.prefix: jpgpngjpeg</li>
+                      <li>string.pattern: (jpg|jpeg|png)$</li>
                     
                       <li>string.uri: true</li>
                     
@@ -4313,7 +4532,7 @@
                   <td>
                     <ul>
                     
-                      <li>string.prefix: jpgpngjpeg</li>
+                      <li>string.pattern: (jpg|jpeg|png)$</li>
                     
                       <li>string.uri: true</li>
                     
@@ -4550,7 +4769,7 @@
                   <td>
                     <ul>
                     
-                      <li>string.pattern: ^[a-z0-9]{2,30}$</li>
+                      <li>string.pattern: .{2,30}</li>
                     
                     </ul>
                   </td>
@@ -4572,7 +4791,7 @@
                   <td>
                     <ul>
                     
-                      <li>string.prefix: jpgpngjpeg</li>
+                      <li>string.pattern: (jpg|jpeg|png)$</li>
                     
                       <li>string.uri: true</li>
                     
@@ -4753,7 +4972,7 @@
                   <td>
                     <ul>
                     
-                      <li>string.pattern: ^[a-z0-9]{2,30}$</li>
+                      <li>string.pattern: .{2,30}</li>
                     
                     </ul>
                   </td>

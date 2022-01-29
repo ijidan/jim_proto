@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommonServiceClient interface {
 	UploadImage(ctx context.Context, opts ...grpc.CallOption) (CommonService_UploadImageClient, error)
+	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*SendEmailResponse, error)
 }
 
 type commonServiceClient struct {
@@ -67,11 +68,21 @@ func (x *commonServiceUploadImageClient) CloseAndRecv() (*UploadImageResponse, e
 	return m, nil
 }
 
+func (c *commonServiceClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*SendEmailResponse, error) {
+	out := new(SendEmailResponse)
+	err := c.cc.Invoke(ctx, "/common.CommonService/SendEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CommonServiceServer is the server API for CommonService service.
 // All implementations must embed UnimplementedCommonServiceServer
 // for forward compatibility
 type CommonServiceServer interface {
 	UploadImage(CommonService_UploadImageServer) error
+	SendEmail(context.Context, *SendEmailRequest) (*SendEmailResponse, error)
 	mustEmbedUnimplementedCommonServiceServer()
 }
 
@@ -81,6 +92,9 @@ type UnimplementedCommonServiceServer struct {
 
 func (UnimplementedCommonServiceServer) UploadImage(CommonService_UploadImageServer) error {
 	return status.Errorf(codes.Unimplemented, "method UploadImage not implemented")
+}
+func (UnimplementedCommonServiceServer) SendEmail(context.Context, *SendEmailRequest) (*SendEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEmail not implemented")
 }
 func (UnimplementedCommonServiceServer) mustEmbedUnimplementedCommonServiceServer() {}
 
@@ -121,13 +135,36 @@ func (x *commonServiceUploadImageServer) Recv() (*UploadImageRequest, error) {
 	return m, nil
 }
 
+func _CommonService_SendEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommonServiceServer).SendEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/common.CommonService/SendEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommonServiceServer).SendEmail(ctx, req.(*SendEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CommonService_ServiceDesc is the grpc.ServiceDesc for CommonService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CommonService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "common.CommonService",
 	HandlerType: (*CommonServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SendEmail",
+			Handler:    _CommonService_SendEmail_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UploadImage",

@@ -24,7 +24,7 @@ message Group{
 message CreateGroupRequest{
   string name = 1 [(validate.rules).string = {pattern: "^[a-z0-9]{2,30}$"}];
   string introduction = 2 [(validate.rules).string = {ignore_empty:true,pattern: "^\\s{2,30}$"}];
-  string avatar_url = 3 [(validate.rules).string = {uri: true,prefix:"jpg" "png" "jpeg"}];
+  string avatar_url = 3 [(validate.rules).string = {uri: true,pattern:"(jpg|jpeg|png)$"}];
 }
 
 message CreateGroupResponse{
@@ -35,7 +35,7 @@ message UpdateGroupRequest{
   uint64 id = 1 [(validate.rules).uint64 = {gt:0}];
   string name = 2 [(validate.rules).string = {ignore_empty:true,pattern: "^[a-z0-9]{2,30}$"}];
   string introduction = 3 [(validate.rules).string = {ignore_empty:true,pattern: "^\\s{2,30}$"}];
-  string avatar_url = 4 [(validate.rules).string = {ignore_empty:true,uri: true,prefix:"jpg" "png" "jpeg"}];
+  string avatar_url = 4 [(validate.rules).string = {ignore_empty:true,uri: true,pattern:"(jpg|jpeg|png)$"}];
 }
 
 message UpdateGroupResponse{

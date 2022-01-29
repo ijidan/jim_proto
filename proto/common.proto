@@ -40,12 +40,27 @@ message UploadImageRequest{
 message UploadImageResponse{
   string url = 1;
 }
+message SendEmailRequest{
+  map<string, string> receiver = 1 [(validate.rules).map = {min_pairs: 1, max_pairs: 500}, (validate.rules).map.values.string = {email:true}];
+  map<string, string> cc = 2 [(validate.rules).map = {min_pairs: 0, max_pairs: 500}, (validate.rules).map.values.string = {email:true}];
+  string subject = 3 [(validate.rules).string = {min_len :1,max_len:50}];
+  string content = 4 [(validate.rules).string = {min_len:1,max_len:2000}];
+}
+message SendEmailResponse{
+
+}
 
 service CommonService{
 
   rpc UploadImage(stream UploadImageRequest) returns(UploadImageResponse){
     option(google.api.http) = {
       post:"/v1/api/common/image",
+      body:"*"
+    };
+  }
+  rpc SendEmail(SendEmailRequest) returns(SendEmailResponse){
+    option(google.api.http) = {
+      post:"/v1/api/common/email",
       body:"*"
     };
   }
