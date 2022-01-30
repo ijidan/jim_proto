@@ -15,8 +15,40 @@
     - [UploadImageResponse](#common.UploadImageResponse)
   
     - [Gender](#common.Gender)
+    - [IsEnable](#common.IsEnable)
+    - [ReviewStatus](#common.ReviewStatus)
   
     - [CommonService](#common.CommonService)
+  
+- [feed.proto](#feed.proto)
+    - [Feed](#user.Feed)
+    - [FeedCreateRequest](#user.FeedCreateRequest)
+    - [FeedCreateResponse](#user.FeedCreateResponse)
+    - [FeedDeleteRequest](#user.FeedDeleteRequest)
+    - [FeedDeleteResponse](#user.FeedDeleteResponse)
+    - [FeedEditRequest](#user.FeedEditRequest)
+    - [FeedEditResponse](#user.FeedEditResponse)
+    - [FeedFollowRequest](#user.FeedFollowRequest)
+    - [FeedFollowResponse](#user.FeedFollowResponse)
+    - [FeedGetRequest](#user.FeedGetRequest)
+    - [FeedGetResponse](#user.FeedGetResponse)
+    - [FeedImage](#user.FeedImage)
+    - [FeedLike](#user.FeedLike)
+    - [FeedLikeRequest](#user.FeedLikeRequest)
+    - [FeedLikeResponse](#user.FeedLikeResponse)
+    - [FeedOwnRequest](#user.FeedOwnRequest)
+    - [FeedOwnResponse](#user.FeedOwnResponse)
+    - [FeedRecommendRequest](#user.FeedRecommendRequest)
+    - [FeedRecommendResponse](#user.FeedRecommendResponse)
+    - [FeedSearchRequest](#user.FeedSearchRequest)
+    - [FeedSearchResponse](#user.FeedSearchResponse)
+    - [FeedUnLikeRequest](#user.FeedUnLikeRequest)
+    - [FeedUnLikeResponse](#user.FeedUnLikeResponse)
+    - [FeedVideo](#user.FeedVideo)
+  
+    - [FeedType](#user.FeedType)
+  
+    - [FeedService](#user.FeedService)
   
 - [group.proto](#group.proto)
     - [CreateGroupRequest](#group.CreateGroupRequest)
@@ -276,6 +308,32 @@
 | Female | 2 | 女 |
 
 
+
+<a name="common.IsEnable"></a>
+
+### IsEnable
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NotEnable | 0 | 未启用 |
+| Enable | 1 | 启用 |
+
+
+
+<a name="common.ReviewStatus"></a>
+
+### ReviewStatus
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ReviewInit | 0 | 未提交审核 |
+| ReviewTo | 1 | 已提交，待审核 |
+| ReviewPass | 2 | 审核通过 |
+| ReviewFail | 3 | 审核未通过 |
+
+
  
 
  
@@ -290,6 +348,445 @@
 | ----------- | ------------ | ------------- | ------------|
 | UploadImage | [UploadImageRequest](#common.UploadImageRequest) stream | [UploadImageResponse](#common.UploadImageResponse) |  |
 | SendEmail | [SendEmailRequest](#common.SendEmailRequest) | [SendEmailResponse](#common.SendEmailResponse) |  |
+
+ 
+
+
+
+<a name="feed.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## feed.proto
+
+
+
+<a name="user.Feed"></a>
+
+### Feed
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| user_id | [uint64](#uint64) |  |  |
+| content | [string](#string) |  |  |
+| type | [FeedType](#user.FeedType) |  |  |
+| like_count | [uint64](#uint64) |  |  |
+| view_count | [uint64](#uint64) |  |  |
+| comment_count | [uint64](#uint64) |  |  |
+| operator | [uint64](#uint64) |  |  |
+| remark | [string](#string) |  |  |
+| hot | [uint64](#uint64) |  |  |
+| is_enable | [common.IsEnable](#common.IsEnable) |  |  |
+| review_status | [common.ReviewStatus](#common.ReviewStatus) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| deleted_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+
+
+
+
+
+
+<a name="user.FeedCreateRequest"></a>
+
+### FeedCreateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [FeedType](#user.FeedType) |  |  |
+| content | [string](#string) |  |  |
+| resource | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="user.FeedCreateResponse"></a>
+
+### FeedCreateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feed | [Feed](#user.Feed) |  |  |
+
+
+
+
+
+
+<a name="user.FeedDeleteRequest"></a>
+
+### FeedDeleteRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedDeleteResponse"></a>
+
+### FeedDeleteResponse
+
+
+
+
+
+
+
+<a name="user.FeedEditRequest"></a>
+
+### FeedEditRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| type | [FeedType](#user.FeedType) |  |  |
+| content | [string](#string) |  |  |
+| resource | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="user.FeedEditResponse"></a>
+
+### FeedEditResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedFollowRequest"></a>
+
+### FeedFollowRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| num | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedFollowResponse"></a>
+
+### FeedFollowResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pager | [common.Pager](#common.Pager) |  |  |
+| feed | [Feed](#user.Feed) | repeated |  |
+
+
+
+
+
+
+<a name="user.FeedGetRequest"></a>
+
+### FeedGetRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedGetResponse"></a>
+
+### FeedGetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feed | [Feed](#user.Feed) |  |  |
+
+
+
+
+
+
+<a name="user.FeedImage"></a>
+
+### FeedImage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| feed_id | [uint64](#uint64) |  |  |
+| img_url | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| deleted_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+
+
+
+
+
+
+<a name="user.FeedLike"></a>
+
+### FeedLike
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| feed_id | [uint64](#uint64) |  |  |
+| user_id | [uint64](#uint64) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| deleted_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+
+
+
+
+
+
+<a name="user.FeedLikeRequest"></a>
+
+### FeedLikeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedLikeResponse"></a>
+
+### FeedLikeResponse
+
+
+
+
+
+
+
+<a name="user.FeedOwnRequest"></a>
+
+### FeedOwnRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keyword | [string](#string) |  |  |
+| review_status | [common.ReviewStatus](#common.ReviewStatus) |  |  |
+| last_id | [uint64](#uint64) |  |  |
+| num | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedOwnResponse"></a>
+
+### FeedOwnResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pager | [common.Pager](#common.Pager) |  |  |
+| feed | [Feed](#user.Feed) | repeated |  |
+
+
+
+
+
+
+<a name="user.FeedRecommendRequest"></a>
+
+### FeedRecommendRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| num | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedRecommendResponse"></a>
+
+### FeedRecommendResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pager | [common.Pager](#common.Pager) |  |  |
+| feed | [Feed](#user.Feed) | repeated |  |
+
+
+
+
+
+
+<a name="user.FeedSearchRequest"></a>
+
+### FeedSearchRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keyword | [string](#string) |  |  |
+| last_id | [uint64](#uint64) |  |  |
+| num | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedSearchResponse"></a>
+
+### FeedSearchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pager | [common.Pager](#common.Pager) |  |  |
+| feed | [Feed](#user.Feed) | repeated |  |
+
+
+
+
+
+
+<a name="user.FeedUnLikeRequest"></a>
+
+### FeedUnLikeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedUnLikeResponse"></a>
+
+### FeedUnLikeResponse
+
+
+
+
+
+
+
+<a name="user.FeedVideo"></a>
+
+### FeedVideo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| feed_id | [uint64](#uint64) |  |  |
+| video_url | [string](#string) |  |  |
+| cover_url | [string](#string) |  |  |
+| width | [uint64](#uint64) |  |  |
+| height | [uint64](#uint64) |  |  |
+| duration | [double](#double) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| deleted_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+
+
+
+
+
+ 
+
+
+<a name="user.FeedType"></a>
+
+### FeedType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Txt | 0 | 文本 |
+| Image | 1 | 图片 |
+| Video | 2 | 视频 |
+
+
+ 
+
+ 
+
+
+<a name="user.FeedService"></a>
+
+### FeedService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| FeedCreate | [FeedCreateRequest](#user.FeedCreateRequest) | [FeedCreateResponse](#user.FeedCreateResponse) |  |
+| FeedEdit | [FeedEditRequest](#user.FeedEditRequest) | [FeedEditResponse](#user.FeedEditResponse) |  |
+| FeedLike | [FeedLikeRequest](#user.FeedLikeRequest) | [FeedLikeResponse](#user.FeedLikeResponse) |  |
+| FeedUnLike | [FeedUnLikeRequest](#user.FeedUnLikeRequest) | [FeedUnLikeResponse](#user.FeedUnLikeResponse) |  |
+| FeedGet | [FeedGetRequest](#user.FeedGetRequest) | [FeedGetResponse](#user.FeedGetResponse) |  |
+| FeedDelete | [FeedDeleteRequest](#user.FeedDeleteRequest) | [FeedDeleteResponse](#user.FeedDeleteResponse) |  |
+| FeedOwn | [FeedOwnRequest](#user.FeedOwnRequest) | [FeedOwnResponse](#user.FeedOwnResponse) |  |
+| FeedSearch | [FeedSearchRequest](#user.FeedSearchRequest) | [FeedSearchResponse](#user.FeedSearchResponse) |  |
+| FeedFollow | [FeedFollowRequest](#user.FeedFollowRequest) | [FeedFollowResponse](#user.FeedFollowResponse) |  |
 
  
 
@@ -1545,8 +2042,8 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| createUser | [UserCreateRequest](#user.UserCreateRequest) | [UserCreateResponse](#user.UserCreateResponse) |  |
-| userLogin | [UserLoginRequest](#user.UserLoginRequest) | [UserLoginResponse](#user.UserLoginResponse) |  |
+| CreateUser | [UserCreateRequest](#user.UserCreateRequest) | [UserCreateResponse](#user.UserCreateResponse) |  |
+| UserLogin | [UserLoginRequest](#user.UserLoginRequest) | [UserLoginResponse](#user.UserLoginResponse) |  |
 | GetUser | [UserGetRequest](#user.UserGetRequest) | [UserGetResponse](#user.UserGetResponse) |  |
 | QueryUser | [UserQueryRequest](#user.UserQueryRequest) | [UserQueryResponse](#user.UserQueryResponse) |  |
 | UpdatePassword | [UpdatePasswordRequest](#user.UpdatePasswordRequest) | [UpdatePasswordResponse](#user.UpdatePasswordResponse) |  |

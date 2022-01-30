@@ -40,7 +40,7 @@ message UserGetResponse{
 }
 
 message UserQueryRequest{
-  string keyword = 1;
+  string keyword = 1 [(validate.rules).string = {ignore_empty:true,pattern: "^\\s{1,10}$"}];
   uint64 page = 2 [(validate.rules).uint64 = {gt:0}];
   uint64 page_size = 3 [(validate.rules).uint64 = {gt:0}];
 }
@@ -76,14 +76,14 @@ message UpdatePasswordResponse{
 
 service UserService{
 
-  rpc createUser(UserCreateRequest) returns(UserCreateResponse){
+  rpc CreateUser(UserCreateRequest) returns(UserCreateResponse){
     option (google.api.http) = {
       post: "/v1/api/user",
       body:"*"
     };
   }
 
-  rpc userLogin(UserLoginRequest) returns(UserLoginResponse){
+  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse){
     option(google.api.http) = {
       post:"/v1/api/user/login",
       body:"*"

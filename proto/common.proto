@@ -11,6 +11,17 @@ enum Gender{
   Male = 1; //男
   Female = 2;// 女
 }
+enum IsEnable{
+  NotEnable = 0; //未启用
+  Enable = 1; //启用
+}
+
+enum ReviewStatus{
+  ReviewInit = 0; //未提交审核
+  ReviewTo = 1; //已提交，待审核
+  ReviewPass = 2; //审核通过
+  ReviewFail = 3; //审核未通过
+}
 
 message ImageInfo{
   string name = 1  [(validate.rules).string = {min_len :1}];

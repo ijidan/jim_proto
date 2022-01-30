@@ -809,7 +809,20 @@ func (m *UserQueryRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Keyword
+	if m.GetKeyword() != "" {
+
+		if !_UserQueryRequest_Keyword_Pattern.MatchString(m.GetKeyword()) {
+			err := UserQueryRequestValidationError{
+				field:  "Keyword",
+				reason: "value does not match regex pattern \"^\\\\s{1,10}$\"",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
 
 	if m.GetPage() <= 0 {
 		err := UserQueryRequestValidationError{
@@ -910,6 +923,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UserQueryRequestValidationError{}
+
+var _UserQueryRequest_Keyword_Pattern = regexp.MustCompile("^\\s{1,10}$")
 
 // Validate checks the field values on UserQueryResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
