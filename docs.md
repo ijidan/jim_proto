@@ -837,7 +837,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| message_id | [uint64](#uint64) |  |  |
+| data | [uint64](#uint64) |  |  |
 
 
 
@@ -894,8 +894,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gateway_id | [uint64](#uint64) |  |  |
-| message_id | [uint64](#uint64) |  |  |
+| data | [bytes](#bytes) |  |  |
 
 
 

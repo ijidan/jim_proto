@@ -2944,7 +2944,7 @@
             <tbody>
               
                 <tr>
-                  <td>message_id</td>
+                  <td>data</td>
                   <td><a href="#uint64">uint64</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -2967,7 +2967,7 @@
               <tbody>
               
                 <tr>
-                  <td>message_id</td>
+                  <td>data</td>
                   <td>
                     <ul>
                     
@@ -3140,15 +3140,8 @@
             <tbody>
               
                 <tr>
-                  <td>gateway_id</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>message_id</td>
-                  <td><a href="#uint64">uint64</a></td>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -3170,22 +3163,11 @@
               <tbody>
               
                 <tr>
-                  <td>gateway_id</td>
+                  <td>data</td>
                   <td>
                     <ul>
                     
-                      <li>uint64.gt: 0</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-                <tr>
-                  <td>message_id</td>
-                  <td>
-                    <ul>
-                    
-                      <li>uint64.gt: 0</li>
+                      <li>bytes.min_len: 1</li>
                     
                     </ul>
                   </td>

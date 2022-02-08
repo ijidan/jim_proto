@@ -629,21 +629,10 @@ func (m *SendMessageResponse) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetGatewayId() <= 0 {
+	if len(m.GetData()) < 1 {
 		err := SendMessageResponseValidationError{
-			field:  "GatewayId",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if m.GetMessageId() <= 0 {
-		err := SendMessageResponseValidationError{
-			field:  "MessageId",
-			reason: "value must be greater than 0",
+			field:  "Data",
+			reason: "value length must be at least 1 bytes",
 		}
 		if !all {
 			return err
@@ -875,9 +864,9 @@ func (m *PushToAllResponse) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetMessageId() <= 0 {
+	if m.GetData() <= 0 {
 		err := PushToAllResponseValidationError{
-			field:  "MessageId",
+			field:  "Data",
 			reason: "value must be greater than 0",
 		}
 		if !all {

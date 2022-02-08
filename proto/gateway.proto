@@ -31,18 +31,19 @@ message SendMessageRequest{
 }
 
 message SendMessageResponse{
-  uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
-  uint64 message_id = 2[(validate.rules).uint64 = {gt:0}];
+  bytes data = 1 [(validate.rules).bytes = {min_len:1}];
+
 
 }
 
 message PushToAllRequest{
   uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
   bytes data = 2 [(validate.rules).bytes = {min_len:1}];
+
 }
 
 message PushToAllResponse{
-  uint64 message_id = 1[(validate.rules).uint64 = {gt:0}];
+  uint64 data = 1[(validate.rules).uint64 = {gt:0}];
 }
 
 
