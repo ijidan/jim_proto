@@ -29,7 +29,7 @@ type FeedServiceClient interface {
 	FeedGet(ctx context.Context, in *FeedGetRequest, opts ...grpc.CallOption) (*FeedGetResponse, error)
 	FeedDelete(ctx context.Context, in *FeedDeleteRequest, opts ...grpc.CallOption) (*FeedDeleteResponse, error)
 	FeedOwn(ctx context.Context, in *FeedOwnRequest, opts ...grpc.CallOption) (*FeedOwnResponse, error)
-	FeedSearch(ctx context.Context, in *FeedSearchRequest, opts ...grpc.CallOption) (*FeedSearchResponse, error)
+	FeedQuery(ctx context.Context, in *FeedQueryRequest, opts ...grpc.CallOption) (*FeedQueryResponse, error)
 	FeedFollow(ctx context.Context, in *FeedFollowRequest, opts ...grpc.CallOption) (*FeedFollowResponse, error)
 }
 
@@ -104,9 +104,9 @@ func (c *feedServiceClient) FeedOwn(ctx context.Context, in *FeedOwnRequest, opt
 	return out, nil
 }
 
-func (c *feedServiceClient) FeedSearch(ctx context.Context, in *FeedSearchRequest, opts ...grpc.CallOption) (*FeedSearchResponse, error) {
-	out := new(FeedSearchResponse)
-	err := c.cc.Invoke(ctx, "/user.FeedService/FeedSearch", in, out, opts...)
+func (c *feedServiceClient) FeedQuery(ctx context.Context, in *FeedQueryRequest, opts ...grpc.CallOption) (*FeedQueryResponse, error) {
+	out := new(FeedQueryResponse)
+	err := c.cc.Invoke(ctx, "/user.FeedService/FeedQuery", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type FeedServiceServer interface {
 	FeedGet(context.Context, *FeedGetRequest) (*FeedGetResponse, error)
 	FeedDelete(context.Context, *FeedDeleteRequest) (*FeedDeleteResponse, error)
 	FeedOwn(context.Context, *FeedOwnRequest) (*FeedOwnResponse, error)
-	FeedSearch(context.Context, *FeedSearchRequest) (*FeedSearchResponse, error)
+	FeedQuery(context.Context, *FeedQueryRequest) (*FeedQueryResponse, error)
 	FeedFollow(context.Context, *FeedFollowRequest) (*FeedFollowResponse, error)
 	mustEmbedUnimplementedFeedServiceServer()
 }
@@ -163,8 +163,8 @@ func (UnimplementedFeedServiceServer) FeedDelete(context.Context, *FeedDeleteReq
 func (UnimplementedFeedServiceServer) FeedOwn(context.Context, *FeedOwnRequest) (*FeedOwnResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FeedOwn not implemented")
 }
-func (UnimplementedFeedServiceServer) FeedSearch(context.Context, *FeedSearchRequest) (*FeedSearchResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FeedSearch not implemented")
+func (UnimplementedFeedServiceServer) FeedQuery(context.Context, *FeedQueryRequest) (*FeedQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FeedQuery not implemented")
 }
 func (UnimplementedFeedServiceServer) FeedFollow(context.Context, *FeedFollowRequest) (*FeedFollowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FeedFollow not implemented")
@@ -308,20 +308,20 @@ func _FeedService_FeedOwn_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FeedService_FeedSearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FeedSearchRequest)
+func _FeedService_FeedQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FeedQueryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FeedServiceServer).FeedSearch(ctx, in)
+		return srv.(FeedServiceServer).FeedQuery(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.FeedService/FeedSearch",
+		FullMethod: "/user.FeedService/FeedQuery",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeedServiceServer).FeedSearch(ctx, req.(*FeedSearchRequest))
+		return srv.(FeedServiceServer).FeedQuery(ctx, req.(*FeedQueryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -380,8 +380,8 @@ var FeedService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FeedService_FeedOwn_Handler,
 		},
 		{
-			MethodName: "FeedSearch",
-			Handler:    _FeedService_FeedSearch_Handler,
+			MethodName: "FeedQuery",
+			Handler:    _FeedService_FeedQuery_Handler,
 		},
 		{
 			MethodName: "FeedFollow",

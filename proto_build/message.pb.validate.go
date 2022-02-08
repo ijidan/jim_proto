@@ -4669,3 +4669,218 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendGroupFileMessageResponseValidationError{}
+
+// Validate checks the field values on ParseMessageRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ParseMessageRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ParseMessageRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ParseMessageRequestMultiError, or nil if none found.
+func (m *ParseMessageRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ParseMessageRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(m.GetContent()) < 1 {
+		err := ParseMessageRequestValidationError{
+			field:  "Content",
+			reason: "value length must be at least 1 bytes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ParseMessageRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ParseMessageRequestMultiError is an error wrapping multiple validation
+// errors returned by ParseMessageRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ParseMessageRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ParseMessageRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ParseMessageRequestMultiError) AllErrors() []error { return m }
+
+// ParseMessageRequestValidationError is the validation error returned by
+// ParseMessageRequest.Validate if the designated constraints aren't met.
+type ParseMessageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ParseMessageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ParseMessageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ParseMessageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ParseMessageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ParseMessageRequestValidationError) ErrorName() string {
+	return "ParseMessageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ParseMessageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sParseMessageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ParseMessageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ParseMessageRequestValidationError{}
+
+// Validate checks the field values on ParseMessageResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ParseMessageResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ParseMessageResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ParseMessageResponseMultiError, or nil if none found.
+func (m *ParseMessageResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ParseMessageResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ParseMessageResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ParseMessageResponseMultiError is an error wrapping multiple validation
+// errors returned by ParseMessageResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ParseMessageResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ParseMessageResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ParseMessageResponseMultiError) AllErrors() []error { return m }
+
+// ParseMessageResponseValidationError is the validation error returned by
+// ParseMessageResponse.Validate if the designated constraints aren't met.
+type ParseMessageResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ParseMessageResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ParseMessageResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ParseMessageResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ParseMessageResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ParseMessageResponseValidationError) ErrorName() string {
+	return "ParseMessageResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ParseMessageResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sParseMessageResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ParseMessageResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ParseMessageResponseValidationError{}

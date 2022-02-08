@@ -2335,16 +2335,7 @@ func (m *FeedOwnRequest) validate(all bool) error {
 
 	}
 
-	if _, ok := ReviewStatus_name[int32(m.GetReviewStatus())]; !ok {
-		err := FeedOwnRequestValidationError{
-			field:  "ReviewStatus",
-			reason: "value must be one of the defined enum values",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for ReviewStatus
 
 	if m.GetLastId() < 0 {
 		err := FeedOwnRequestValidationError{
@@ -2611,22 +2602,22 @@ var _ interface {
 	ErrorName() string
 } = FeedOwnResponseValidationError{}
 
-// Validate checks the field values on FeedSearchRequest with the rules defined
+// Validate checks the field values on FeedQueryRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
-func (m *FeedSearchRequest) Validate() error {
+func (m *FeedQueryRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on FeedSearchRequest with the rules
+// ValidateAll checks the field values on FeedQueryRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// FeedSearchRequestMultiError, or nil if none found.
-func (m *FeedSearchRequest) ValidateAll() error {
+// FeedQueryRequestMultiError, or nil if none found.
+func (m *FeedQueryRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *FeedSearchRequest) validate(all bool) error {
+func (m *FeedQueryRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2635,8 +2626,8 @@ func (m *FeedSearchRequest) validate(all bool) error {
 
 	if m.GetKeyword() != "" {
 
-		if !_FeedSearchRequest_Keyword_Pattern.MatchString(m.GetKeyword()) {
-			err := FeedSearchRequestValidationError{
+		if !_FeedQueryRequest_Keyword_Pattern.MatchString(m.GetKeyword()) {
+			err := FeedQueryRequestValidationError{
 				field:  "Keyword",
 				reason: "value does not match regex pattern \"^\\\\s{1,10}$\"",
 			}
@@ -2649,7 +2640,7 @@ func (m *FeedSearchRequest) validate(all bool) error {
 	}
 
 	if m.GetLastId() < 0 {
-		err := FeedSearchRequestValidationError{
+		err := FeedQueryRequestValidationError{
 			field:  "LastId",
 			reason: "value must be greater than or equal to 0",
 		}
@@ -2660,7 +2651,7 @@ func (m *FeedSearchRequest) validate(all bool) error {
 	}
 
 	if m.GetNum() <= 0 {
-		err := FeedSearchRequestValidationError{
+		err := FeedQueryRequestValidationError{
 			field:  "Num",
 			reason: "value must be greater than 0",
 		}
@@ -2671,19 +2662,19 @@ func (m *FeedSearchRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return FeedSearchRequestMultiError(errors)
+		return FeedQueryRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// FeedSearchRequestMultiError is an error wrapping multiple validation errors
-// returned by FeedSearchRequest.ValidateAll() if the designated constraints
+// FeedQueryRequestMultiError is an error wrapping multiple validation errors
+// returned by FeedQueryRequest.ValidateAll() if the designated constraints
 // aren't met.
-type FeedSearchRequestMultiError []error
+type FeedQueryRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m FeedSearchRequestMultiError) Error() string {
+func (m FeedQueryRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2692,11 +2683,11 @@ func (m FeedSearchRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m FeedSearchRequestMultiError) AllErrors() []error { return m }
+func (m FeedQueryRequestMultiError) AllErrors() []error { return m }
 
-// FeedSearchRequestValidationError is the validation error returned by
-// FeedSearchRequest.Validate if the designated constraints aren't met.
-type FeedSearchRequestValidationError struct {
+// FeedQueryRequestValidationError is the validation error returned by
+// FeedQueryRequest.Validate if the designated constraints aren't met.
+type FeedQueryRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2704,24 +2695,22 @@ type FeedSearchRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e FeedSearchRequestValidationError) Field() string { return e.field }
+func (e FeedQueryRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e FeedSearchRequestValidationError) Reason() string { return e.reason }
+func (e FeedQueryRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e FeedSearchRequestValidationError) Cause() error { return e.cause }
+func (e FeedQueryRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e FeedSearchRequestValidationError) Key() bool { return e.key }
+func (e FeedQueryRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e FeedSearchRequestValidationError) ErrorName() string {
-	return "FeedSearchRequestValidationError"
-}
+func (e FeedQueryRequestValidationError) ErrorName() string { return "FeedQueryRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e FeedSearchRequestValidationError) Error() string {
+func (e FeedQueryRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2733,14 +2722,14 @@ func (e FeedSearchRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sFeedSearchRequest.%s: %s%s",
+		"invalid %sFeedQueryRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = FeedSearchRequestValidationError{}
+var _ error = FeedQueryRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -2748,26 +2737,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = FeedSearchRequestValidationError{}
+} = FeedQueryRequestValidationError{}
 
-var _FeedSearchRequest_Keyword_Pattern = regexp.MustCompile("^\\s{1,10}$")
+var _FeedQueryRequest_Keyword_Pattern = regexp.MustCompile("^\\s{1,10}$")
 
-// Validate checks the field values on FeedSearchResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *FeedSearchResponse) Validate() error {
+// Validate checks the field values on FeedQueryResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *FeedQueryResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on FeedSearchResponse with the rules
+// ValidateAll checks the field values on FeedQueryResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// FeedSearchResponseMultiError, or nil if none found.
-func (m *FeedSearchResponse) ValidateAll() error {
+// FeedQueryResponseMultiError, or nil if none found.
+func (m *FeedQueryResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *FeedSearchResponse) validate(all bool) error {
+func (m *FeedQueryResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2778,7 +2767,7 @@ func (m *FeedSearchResponse) validate(all bool) error {
 		switch v := interface{}(m.GetPager()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FeedSearchResponseValidationError{
+				errors = append(errors, FeedQueryResponseValidationError{
 					field:  "Pager",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2786,7 +2775,7 @@ func (m *FeedSearchResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, FeedSearchResponseValidationError{
+				errors = append(errors, FeedQueryResponseValidationError{
 					field:  "Pager",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2795,7 +2784,7 @@ func (m *FeedSearchResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetPager()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return FeedSearchResponseValidationError{
+			return FeedQueryResponseValidationError{
 				field:  "Pager",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -2810,7 +2799,7 @@ func (m *FeedSearchResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, FeedSearchResponseValidationError{
+					errors = append(errors, FeedQueryResponseValidationError{
 						field:  fmt.Sprintf("Feed[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2818,7 +2807,7 @@ func (m *FeedSearchResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, FeedSearchResponseValidationError{
+					errors = append(errors, FeedQueryResponseValidationError{
 						field:  fmt.Sprintf("Feed[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -2827,7 +2816,7 @@ func (m *FeedSearchResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return FeedSearchResponseValidationError{
+				return FeedQueryResponseValidationError{
 					field:  fmt.Sprintf("Feed[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -2838,19 +2827,19 @@ func (m *FeedSearchResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return FeedSearchResponseMultiError(errors)
+		return FeedQueryResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// FeedSearchResponseMultiError is an error wrapping multiple validation errors
-// returned by FeedSearchResponse.ValidateAll() if the designated constraints
+// FeedQueryResponseMultiError is an error wrapping multiple validation errors
+// returned by FeedQueryResponse.ValidateAll() if the designated constraints
 // aren't met.
-type FeedSearchResponseMultiError []error
+type FeedQueryResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m FeedSearchResponseMultiError) Error() string {
+func (m FeedQueryResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2859,11 +2848,11 @@ func (m FeedSearchResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m FeedSearchResponseMultiError) AllErrors() []error { return m }
+func (m FeedQueryResponseMultiError) AllErrors() []error { return m }
 
-// FeedSearchResponseValidationError is the validation error returned by
-// FeedSearchResponse.Validate if the designated constraints aren't met.
-type FeedSearchResponseValidationError struct {
+// FeedQueryResponseValidationError is the validation error returned by
+// FeedQueryResponse.Validate if the designated constraints aren't met.
+type FeedQueryResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2871,24 +2860,24 @@ type FeedSearchResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e FeedSearchResponseValidationError) Field() string { return e.field }
+func (e FeedQueryResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e FeedSearchResponseValidationError) Reason() string { return e.reason }
+func (e FeedQueryResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e FeedSearchResponseValidationError) Cause() error { return e.cause }
+func (e FeedQueryResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e FeedSearchResponseValidationError) Key() bool { return e.key }
+func (e FeedQueryResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e FeedSearchResponseValidationError) ErrorName() string {
-	return "FeedSearchResponseValidationError"
+func (e FeedQueryResponseValidationError) ErrorName() string {
+	return "FeedQueryResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e FeedSearchResponseValidationError) Error() string {
+func (e FeedQueryResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2900,14 +2889,14 @@ func (e FeedSearchResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sFeedSearchResponse.%s: %s%s",
+		"invalid %sFeedQueryResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = FeedSearchResponseValidationError{}
+var _ error = FeedQueryResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -2915,7 +2904,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = FeedSearchResponseValidationError{}
+} = FeedQueryResponseValidationError{}
 
 // Validate checks the field values on FeedRecommendRequest with the rules
 // defined in the proto definition for this message. If any rules are

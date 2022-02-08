@@ -38,10 +38,10 @@
     - [FeedLikeResponse](#user.FeedLikeResponse)
     - [FeedOwnRequest](#user.FeedOwnRequest)
     - [FeedOwnResponse](#user.FeedOwnResponse)
+    - [FeedQueryRequest](#user.FeedQueryRequest)
+    - [FeedQueryResponse](#user.FeedQueryResponse)
     - [FeedRecommendRequest](#user.FeedRecommendRequest)
     - [FeedRecommendResponse](#user.FeedRecommendResponse)
-    - [FeedSearchRequest](#user.FeedSearchRequest)
-    - [FeedSearchResponse](#user.FeedSearchResponse)
     - [FeedUnLikeRequest](#user.FeedUnLikeRequest)
     - [FeedUnLikeResponse](#user.FeedUnLikeResponse)
     - [FeedVideo](#user.FeedVideo)
@@ -49,6 +49,18 @@
     - [FeedType](#user.FeedType)
   
     - [FeedService](#user.FeedService)
+  
+- [gateway.proto](#gateway.proto)
+    - [PushToAllRequest](#message.PushToAllRequest)
+    - [PushToAllResponse](#message.PushToAllResponse)
+    - [RegisterRequest](#message.RegisterRequest)
+    - [RegisterResponse](#message.RegisterResponse)
+    - [SendMessageRequest](#message.SendMessageRequest)
+    - [SendMessageResponse](#message.SendMessageResponse)
+    - [UnRegisterRequest](#message.UnRegisterRequest)
+    - [UnRegisterResponse](#message.UnRegisterResponse)
+  
+    - [GatewayService](#message.GatewayService)
   
 - [group.proto](#group.proto)
     - [CreateGroupRequest](#group.CreateGroupRequest)
@@ -77,6 +89,8 @@
     - [ImageMessage](#message.ImageMessage)
     - [ImageMessageItem](#message.ImageMessageItem)
     - [LocationMessage](#message.LocationMessage)
+    - [ParseMessageRequest](#message.ParseMessageRequest)
+    - [ParseMessageResponse](#message.ParseMessageResponse)
     - [SendGroupFaceMessageRequest](#message.SendGroupFaceMessageRequest)
     - [SendGroupFaceMessageResponse](#message.SendGroupFaceMessageResponse)
     - [SendGroupFileMessageRequest](#message.SendGroupFileMessageRequest)
@@ -639,6 +653,39 @@
 
 
 
+<a name="user.FeedQueryRequest"></a>
+
+### FeedQueryRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| keyword | [string](#string) |  |  |
+| last_id | [uint64](#uint64) |  |  |
+| num | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="user.FeedQueryResponse"></a>
+
+### FeedQueryResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pager | [common.Pager](#common.Pager) |  |  |
+| feed | [Feed](#user.Feed) | repeated |  |
+
+
+
+
+
+
 <a name="user.FeedRecommendRequest"></a>
 
 ### FeedRecommendRequest
@@ -657,39 +704,6 @@
 <a name="user.FeedRecommendResponse"></a>
 
 ### FeedRecommendResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| pager | [common.Pager](#common.Pager) |  |  |
-| feed | [Feed](#user.Feed) | repeated |  |
-
-
-
-
-
-
-<a name="user.FeedSearchRequest"></a>
-
-### FeedSearchRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| keyword | [string](#string) |  |  |
-| last_id | [uint64](#uint64) |  |  |
-| num | [uint64](#uint64) |  |  |
-
-
-
-
-
-
-<a name="user.FeedSearchResponse"></a>
-
-### FeedSearchResponse
 
 
 
@@ -785,8 +799,151 @@
 | FeedGet | [FeedGetRequest](#user.FeedGetRequest) | [FeedGetResponse](#user.FeedGetResponse) |  |
 | FeedDelete | [FeedDeleteRequest](#user.FeedDeleteRequest) | [FeedDeleteResponse](#user.FeedDeleteResponse) |  |
 | FeedOwn | [FeedOwnRequest](#user.FeedOwnRequest) | [FeedOwnResponse](#user.FeedOwnResponse) |  |
-| FeedSearch | [FeedSearchRequest](#user.FeedSearchRequest) | [FeedSearchResponse](#user.FeedSearchResponse) |  |
+| FeedQuery | [FeedQueryRequest](#user.FeedQueryRequest) | [FeedQueryResponse](#user.FeedQueryResponse) |  |
 | FeedFollow | [FeedFollowRequest](#user.FeedFollowRequest) | [FeedFollowResponse](#user.FeedFollowResponse) |  |
+
+ 
+
+
+
+<a name="gateway.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## gateway.proto
+
+
+
+<a name="message.PushToAllRequest"></a>
+
+### PushToAllRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gateway_id | [uint64](#uint64) |  |  |
+| data | [bytes](#bytes) |  |  |
+
+
+
+
+
+
+<a name="message.PushToAllResponse"></a>
+
+### PushToAllResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message_id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="message.RegisterRequest"></a>
+
+### RegisterRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gateway_id | [uint64](#uint64) |  |  |
+| client_id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="message.RegisterResponse"></a>
+
+### RegisterResponse
+
+
+
+
+
+
+
+<a name="message.SendMessageRequest"></a>
+
+### SendMessageRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gateway_id | [uint64](#uint64) |  |  |
+| data | [bytes](#bytes) |  |  |
+
+
+
+
+
+
+<a name="message.SendMessageResponse"></a>
+
+### SendMessageResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message_id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="message.UnRegisterRequest"></a>
+
+### UnRegisterRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| gateway_id | [uint64](#uint64) |  |  |
+| client_id | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="message.UnRegisterResponse"></a>
+
+### UnRegisterResponse
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="message.GatewayService"></a>
+
+### GatewayService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Register | [RegisterRequest](#message.RegisterRequest) | [RegisterResponse](#message.RegisterResponse) |  |
+| UnRegister | [UnRegisterRequest](#message.UnRegisterRequest) | [UnRegisterResponse](#message.UnRegisterResponse) |  |
+| SendMessage | [SendMessageRequest](#message.SendMessageRequest) stream | [SendMessageResponse](#message.SendMessageResponse) stream |  |
+| PushToAllMessage | [PushToAllRequest](#message.PushToAllRequest) stream | [PushToAllResponse](#message.PushToAllResponse) stream |  |
 
  
 
@@ -1171,6 +1328,31 @@
 | lng | [double](#double) |  |  |
 | map_link | [string](#string) |  |  |
 | desc | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="message.ParseMessageRequest"></a>
+
+### ParseMessageRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| content | [bytes](#bytes) |  |  |
+
+
+
+
+
+
+<a name="message.ParseMessageResponse"></a>
+
+### ParseMessageResponse
+
 
 
 

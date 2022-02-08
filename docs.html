@@ -310,19 +310,19 @@
                 </li>
               
                 <li>
+                  <a href="#user.FeedQueryRequest"><span class="badge">M</span>FeedQueryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#user.FeedQueryResponse"><span class="badge">M</span>FeedQueryResponse</a>
+                </li>
+              
+                <li>
                   <a href="#user.FeedRecommendRequest"><span class="badge">M</span>FeedRecommendRequest</a>
                 </li>
               
                 <li>
                   <a href="#user.FeedRecommendResponse"><span class="badge">M</span>FeedRecommendResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#user.FeedSearchRequest"><span class="badge">M</span>FeedSearchRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#user.FeedSearchResponse"><span class="badge">M</span>FeedSearchResponse</a>
                 </li>
               
                 <li>
@@ -346,6 +346,53 @@
               
                 <li>
                   <a href="#user.FeedService"><span class="badge">S</span>FeedService</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#gateway.proto">gateway.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#message.PushToAllRequest"><span class="badge">M</span>PushToAllRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#message.PushToAllResponse"><span class="badge">M</span>PushToAllResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#message.RegisterRequest"><span class="badge">M</span>RegisterRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#message.RegisterResponse"><span class="badge">M</span>RegisterResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#message.SendMessageRequest"><span class="badge">M</span>SendMessageRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#message.SendMessageResponse"><span class="badge">M</span>SendMessageResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#message.UnRegisterRequest"><span class="badge">M</span>UnRegisterRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#message.UnRegisterResponse"><span class="badge">M</span>UnRegisterResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#message.GatewayService"><span class="badge">S</span>GatewayService</a>
                 </li>
               
             </ul>
@@ -457,6 +504,14 @@
               
                 <li>
                   <a href="#message.LocationMessage"><span class="badge">M</span>LocationMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#message.ParseMessageRequest"><span class="badge">M</span>ParseMessageRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#message.ParseMessageResponse"><span class="badge">M</span>ParseMessageResponse</a>
                 </li>
               
                 <li>
@@ -2177,17 +2232,6 @@
                 </tr>
               
                 <tr>
-                  <td>review_status</td>
-                  <td>
-                    <ul>
-                    
-                      <li>enum.defined_only: true</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-                <tr>
                   <td>last_id</td>
                   <td>
                     <ul>
@@ -2247,89 +2291,7 @@
 
         
       
-        <h3 id="user.FeedRecommendRequest">FeedRecommendRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>num</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-            
-            
-            <h4>Validated Fields</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Field</td>
-                  <td>Validations</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>num</td>
-                  <td>
-                    <ul>
-                    
-                      <li>uint64.gt: 0</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
-          
-
-        
-      
-        <h3 id="user.FeedRecommendResponse">FeedRecommendResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>pager</td>
-                  <td><a href="#common.Pager">common.Pager</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>feed</td>
-                  <td><a href="#user.Feed">Feed</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="user.FeedSearchRequest">FeedSearchRequest</h3>
+        <h3 id="user.FeedQueryRequest">FeedQueryRequest</h3>
         <p></p>
 
         
@@ -2418,7 +2380,89 @@
 
         
       
-        <h3 id="user.FeedSearchResponse">FeedSearchResponse</h3>
+        <h3 id="user.FeedQueryResponse">FeedQueryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>pager</td>
+                  <td><a href="#common.Pager">common.Pager</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>feed</td>
+                  <td><a href="#user.Feed">Feed</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="user.FeedRecommendRequest">FeedRecommendRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>num</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>num</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="user.FeedRecommendResponse">FeedRecommendResponse</h3>
         <p></p>
 
         
@@ -2687,9 +2731,9 @@
               </tr>
             
               <tr>
-                <td>FeedSearch</td>
-                <td><a href="#user.FeedSearchRequest">FeedSearchRequest</a></td>
-                <td><a href="#user.FeedSearchResponse">FeedSearchResponse</a></td>
+                <td>FeedQuery</td>
+                <td><a href="#user.FeedQueryRequest">FeedQueryRequest</a></td>
+                <td><a href="#user.FeedQueryResponse">FeedQueryResponse</a></td>
                 <td><p></p></td>
               </tr>
             
@@ -2791,9 +2835,9 @@
               
               
               <tr>
-                <td>FeedSearch</td>
+                <td>FeedQuery</td>
                 <td>GET</td>
-                <td>/v1/api/feed/search</td>
+                <td>/v1/api/feed/query</td>
                 <td></td>
               </tr>
               
@@ -2805,6 +2849,510 @@
                 <td>GET</td>
                 <td>/v1/api/feed/follow</td>
                 <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="gateway.proto">gateway.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="message.PushToAllRequest">PushToAllRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td>
+                    <ul>
+                    
+                      <li>bytes.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.PushToAllResponse">PushToAllResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>message_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>message_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.RegisterRequest">RegisterRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>client_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>client_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.RegisterResponse">RegisterResponse</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="message.SendMessageRequest">SendMessageRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td>
+                    <ul>
+                    
+                      <li>bytes.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.SendMessageResponse">SendMessageResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>message_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>message_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.UnRegisterRequest">UnRegisterRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>client_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>client_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint64.gt: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.UnRegisterResponse">UnRegisterResponse</h3>
+        <p></p>
+
+        
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="message.GatewayService">GatewayService</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Register</td>
+                <td><a href="#message.RegisterRequest">RegisterRequest</a></td>
+                <td><a href="#message.RegisterResponse">RegisterResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UnRegister</td>
+                <td><a href="#message.UnRegisterRequest">UnRegisterRequest</a></td>
+                <td><a href="#message.UnRegisterResponse">UnRegisterResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SendMessage</td>
+                <td><a href="#message.SendMessageRequest">SendMessageRequest</a> stream</td>
+                <td><a href="#message.SendMessageResponse">SendMessageResponse</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PushToAllMessage</td>
+                <td><a href="#message.PushToAllRequest">PushToAllRequest</a> stream</td>
+                <td><a href="#message.PushToAllResponse">PushToAllResponse</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>Register</td>
+                <td>POST</td>
+                <td>/v1/api/gateway/register</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UnRegister</td>
+                <td>POST</td>
+                <td>/v1/api/gateway/unRegister</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SendMessage</td>
+                <td>POST</td>
+                <td>/v1/api/gateway/send</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>PushToAllMessage</td>
+                <td>POST</td>
+                <td>/v1/api/gateway/pushToAll</td>
+                <td>*</td>
               </tr>
               
             
@@ -4030,6 +4578,64 @@
           </table>
 
           
+
+        
+      
+        <h3 id="message.ParseMessageRequest">ParseMessageRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>content</td>
+                  <td>
+                    <ul>
+                    
+                      <li>bytes.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="message.ParseMessageResponse">ParseMessageResponse</h3>
+        <p></p>
+
+        
 
         
       

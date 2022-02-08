@@ -242,6 +242,13 @@ message SendGroupFileMessageResponse{
   uint64 id = 1;
 }
 
+message ParseMessageRequest{
+  bytes content = 1 [(validate.rules).bytes = {min_len:1}];
+}
+
+message ParseMessageResponse{
+}
+
 service MessageService {
 
   rpc SendUserTextMessage(SendUserTextMessageRequest) returns(SendUserTextMessageResponse){

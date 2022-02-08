@@ -410,37 +410,37 @@ func local_request_FeedService_FeedOwn_0(ctx context.Context, marshaler runtime.
 }
 
 var (
-	filter_FeedService_FeedSearch_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_FeedService_FeedQuery_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_FeedService_FeedSearch_0(ctx context.Context, marshaler runtime.Marshaler, client FeedServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq FeedSearchRequest
+func request_FeedService_FeedQuery_0(ctx context.Context, marshaler runtime.Marshaler, client FeedServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq FeedQueryRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FeedService_FeedSearch_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FeedService_FeedQuery_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.FeedSearch(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.FeedQuery(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_FeedService_FeedSearch_0(ctx context.Context, marshaler runtime.Marshaler, server FeedServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq FeedSearchRequest
+func local_request_FeedService_FeedQuery_0(ctx context.Context, marshaler runtime.Marshaler, server FeedServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq FeedQueryRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FeedService_FeedSearch_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FeedService_FeedQuery_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.FeedSearch(ctx, &protoReq)
+	msg, err := server.FeedQuery(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -648,18 +648,18 @@ func RegisterFeedServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_FeedService_FeedSearch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_FeedService_FeedQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/user.FeedService/FeedSearch", runtime.WithHTTPPathPattern("/v1/api/feed/search"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/user.FeedService/FeedQuery", runtime.WithHTTPPathPattern("/v1/api/feed/query"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_FeedService_FeedSearch_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_FeedService_FeedQuery_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -667,7 +667,7 @@ func RegisterFeedServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 
-		forward_FeedService_FeedSearch_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_FeedService_FeedQuery_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -875,23 +875,23 @@ func RegisterFeedServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_FeedService_FeedSearch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_FeedService_FeedQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/user.FeedService/FeedSearch", runtime.WithHTTPPathPattern("/v1/api/feed/search"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/user.FeedService/FeedQuery", runtime.WithHTTPPathPattern("/v1/api/feed/query"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_FeedService_FeedSearch_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_FeedService_FeedQuery_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_FeedService_FeedSearch_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_FeedService_FeedQuery_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -933,7 +933,7 @@ var (
 
 	pattern_FeedService_FeedOwn_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "feed", "own"}, ""))
 
-	pattern_FeedService_FeedSearch_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "feed", "search"}, ""))
+	pattern_FeedService_FeedQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "feed", "query"}, ""))
 
 	pattern_FeedService_FeedFollow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "feed", "follow"}, ""))
 )
@@ -953,7 +953,7 @@ var (
 
 	forward_FeedService_FeedOwn_0 = runtime.ForwardResponseMessage
 
-	forward_FeedService_FeedSearch_0 = runtime.ForwardResponseMessage
+	forward_FeedService_FeedQuery_0 = runtime.ForwardResponseMessage
 
 	forward_FeedService_FeedFollow_0 = runtime.ForwardResponseMessage
 )
