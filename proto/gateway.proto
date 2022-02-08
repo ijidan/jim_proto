@@ -8,7 +8,7 @@ import "github.com/envoyproxy/protoc-gen-validate@v0.6.3/validate/validate.proto
 
 
 message RegisterRequest{
-  uint64 gateway_id = 1 [(validate.rules).uint64 = {gt:0}];
+  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
   uint64 client_id = 2 [(validate.rules).uint64 = {gt:0}];
 }
 
@@ -16,7 +16,7 @@ message RegisterResponse{
 }
 
 message UnRegisterRequest{
-  uint64 gateway_id = 1 [(validate.rules).uint64 = {gt:0}];
+  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
   uint64 client_id = 2 [(validate.rules).uint64 = {gt:0}];
 }
 message UnRegisterResponse{
@@ -24,7 +24,7 @@ message UnRegisterResponse{
 }
 
 message SendMessageRequest{
-  uint64 gateway_id = 1 [(validate.rules).uint64 = {gt:0}];
+  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
   bytes data = 2 [(validate.rules).bytes = {min_len:1}];
 }
 
@@ -34,7 +34,7 @@ message SendMessageResponse{
 }
 
 message PushToAllRequest{
-  uint64 gateway_id = 1 [(validate.rules).uint64 = {gt:0}];
+  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
   bytes data = 2 [(validate.rules).bytes = {min_len:1}];
 }
 

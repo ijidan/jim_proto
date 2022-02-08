@@ -57,10 +57,10 @@ func (m *RegisterRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetGatewayId() <= 0 {
+	if utf8.RuneCountInString(m.GetGatewayId()) < 1 {
 		err := RegisterRequestValidationError{
 			field:  "GatewayId",
-			reason: "value must be greater than 0",
+			reason: "value length must be at least 1 runes",
 		}
 		if !all {
 			return err
@@ -279,10 +279,10 @@ func (m *UnRegisterRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetGatewayId() <= 0 {
+	if utf8.RuneCountInString(m.GetGatewayId()) < 1 {
 		err := UnRegisterRequestValidationError{
 			field:  "GatewayId",
-			reason: "value must be greater than 0",
+			reason: "value length must be at least 1 runes",
 		}
 		if !all {
 			return err
@@ -505,10 +505,10 @@ func (m *SendMessageRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetGatewayId() <= 0 {
+	if utf8.RuneCountInString(m.GetGatewayId()) < 1 {
 		err := SendMessageRequestValidationError{
 			field:  "GatewayId",
-			reason: "value must be greater than 0",
+			reason: "value length must be at least 1 runes",
 		}
 		if !all {
 			return err
@@ -742,10 +742,10 @@ func (m *PushToAllRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetGatewayId() <= 0 {
+	if utf8.RuneCountInString(m.GetGatewayId()) < 1 {
 		err := PushToAllRequestValidationError{
 			field:  "GatewayId",
-			reason: "value must be greater than 0",
+			reason: "value length must be at least 1 runes",
 		}
 		if !all {
 			return err
