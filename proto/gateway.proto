@@ -8,33 +8,36 @@ import "github.com/envoyproxy/protoc-gen-validate@v0.6.3/validate/validate.proto
 
 
 message RegisterRequest{
-  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
-  uint64 client_id = 2 [(validate.rules).uint64 = {gt:0}];
+  uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
+  string client_id = 2 [(validate.rules).string = {min_len:1}];
+
 }
 
 message RegisterResponse{
 }
 
 message UnRegisterRequest{
-  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
-  uint64 client_id = 2 [(validate.rules).uint64 = {gt:0}];
+  uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
+  string client_id = 2 [(validate.rules).string = {min_len:1}];
 }
+
 message UnRegisterResponse{
 
 }
 
 message SendMessageRequest{
-  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
+  uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
   bytes data = 2 [(validate.rules).bytes = {min_len:1}];
 }
 
 message SendMessageResponse{
-  uint64 message_id = 1[(validate.rules).uint64 = {gt:0}];
+  uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
+  uint64 message_id = 2[(validate.rules).uint64 = {gt:0}];
 
 }
 
 message PushToAllRequest{
-  string gateway_id = 1 [(validate.rules).string = {min_len:1}];
+  uint64 gateway_id=1 [(validate.rules).uint64 = {gt:0}];
   bytes data = 2 [(validate.rules).bytes = {min_len:1}];
 }
 
