@@ -821,7 +821,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gateway_id | [uint64](#uint64) |  |  |
+| gateway_id | [string](#string) |  |  |
 | data | [bytes](#bytes) |  |  |
 
 
@@ -852,7 +852,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gateway_id | [uint64](#uint64) |  |  |
+| gateway_id | [string](#string) |  |  |
 | client_id | [string](#string) |  |  |
 
 
@@ -878,7 +878,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gateway_id | [uint64](#uint64) |  |  |
+| gateway_id | [string](#string) |  |  |
 | data | [bytes](#bytes) |  |  |
 
 
@@ -909,7 +909,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| gateway_id | [uint64](#uint64) |  |  |
+| gateway_id | [string](#string) |  |  |
 | client_id | [string](#string) |  |  |
 
 
