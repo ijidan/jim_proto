@@ -516,6 +516,28 @@ func (m *SendMessageRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if utf8.RuneCountInString(m.GetCmd()) < 1 {
+		err := SendMessageRequestValidationError{
+			field:  "Cmd",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetRequestId() < 0 {
+		err := SendMessageRequestValidationError{
+			field:  "RequestId",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(m.GetData()) < 1 {
 		err := SendMessageRequestValidationError{
 			field:  "Data",
