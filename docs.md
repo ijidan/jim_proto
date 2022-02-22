@@ -51,8 +51,6 @@
     - [FeedService](#user-FeedService)
   
 - [gateway.proto](#gateway-proto)
-    - [PushToAllRequest](#message-PushToAllRequest)
-    - [PushToAllResponse](#message-PushToAllResponse)
     - [RegisterRequest](#message-RegisterRequest)
     - [RegisterResponse](#message-RegisterResponse)
     - [SendMessageRequest](#message-SendMessageRequest)
@@ -813,37 +811,6 @@
 
 
 
-<a name="message-PushToAllRequest"></a>
-
-### PushToAllRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| gateway_id | [string](#string) |  |  |
-| data | [bytes](#bytes) |  |  |
-
-
-
-
-
-
-<a name="message-PushToAllResponse"></a>
-
-### PushToAllResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| data | [uint64](#uint64) |  |  |
-
-
-
-
-
-
 <a name="message-RegisterRequest"></a>
 
 ### RegisterRequest
@@ -896,6 +863,9 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| gateway_id | [string](#string) |  |  |
+| cmd | [string](#string) |  |  |
+| request_id | [uint32](#uint32) |  |  |
 | data | [bytes](#bytes) |  |  |
 
 
@@ -945,7 +915,6 @@
 | Register | [RegisterRequest](#message-RegisterRequest) | [RegisterResponse](#message-RegisterResponse) |  |
 | UnRegister | [UnRegisterRequest](#message-UnRegisterRequest) | [UnRegisterResponse](#message-UnRegisterResponse) |  |
 | SendMessage | [SendMessageRequest](#message-SendMessageRequest) stream | [SendMessageResponse](#message-SendMessageResponse) stream |  |
-| PushToAllMessage | [PushToAllRequest](#message-PushToAllRequest) stream | [PushToAllResponse](#message-PushToAllResponse) stream |  |
 
  
 

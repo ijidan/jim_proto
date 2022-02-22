@@ -357,14 +357,6 @@
             <ul>
               
                 <li>
-                  <a href="#message.PushToAllRequest"><span class="badge">M</span>PushToAllRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#message.PushToAllResponse"><span class="badge">M</span>PushToAllResponse</a>
-                </li>
-              
-                <li>
                   <a href="#message.RegisterRequest"><span class="badge">M</span>RegisterRequest</a>
                 </li>
               
@@ -2864,126 +2856,6 @@
       <p></p>
 
       
-        <h3 id="message.PushToAllRequest">PushToAllRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>gateway_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>data</td>
-                  <td><a href="#bytes">bytes</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-            
-            
-            <h4>Validated Fields</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Field</td>
-                  <td>Validations</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>gateway_id</td>
-                  <td>
-                    <ul>
-                    
-                      <li>string.min_len: 1</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-                <tr>
-                  <td>data</td>
-                  <td>
-                    <ul>
-                    
-                      <li>bytes.min_len: 1</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
-          
-
-        
-      
-        <h3 id="message.PushToAllResponse">PushToAllResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>data</td>
-                  <td><a href="#uint64">uint64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-            
-            
-            <h4>Validated Fields</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Field</td>
-                  <td>Validations</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>data</td>
-                  <td>
-                    <ul>
-                    
-                      <li>uint64.gt: 0</li>
-                    
-                    </ul>
-                  </td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
-          
-
-        
-      
         <h3 id="message.RegisterRequest">RegisterRequest</h3>
         <p></p>
 
@@ -3176,6 +3048,27 @@
             <tbody>
               
                 <tr>
+                  <td>gateway_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cmd</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request_id</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>data</td>
                   <td><a href="#bytes">bytes</a></td>
                   <td></td>
@@ -3197,6 +3090,39 @@
                 </tr>
               </thead>
               <tbody>
+              
+                <tr>
+                  <td>gateway_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>string.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>cmd</td>
+                  <td>
+                    <ul>
+                    
+                      <li>string.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>request_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>uint32.gte: 0</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
               
                 <tr>
                   <td>data</td>
@@ -3327,13 +3253,6 @@
                 <td><p></p></td>
               </tr>
             
-              <tr>
-                <td>PushToAllMessage</td>
-                <td><a href="#message.PushToAllRequest">PushToAllRequest</a> stream</td>
-                <td><a href="#message.PushToAllResponse">PushToAllResponse</a> stream</td>
-                <td><p></p></td>
-              </tr>
-            
           </tbody>
         </table>
 
@@ -3378,16 +3297,6 @@
                 <td>SendMessage</td>
                 <td>POST</td>
                 <td>/v1/api/gateway/send</td>
-                <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>PushToAllMessage</td>
-                <td>POST</td>
-                <td>/v1/api/gateway/pushToAll</td>
                 <td>*</td>
               </tr>
               

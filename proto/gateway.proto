@@ -33,19 +33,10 @@ message SendMessageRequest{
 }
 
 message SendMessageResponse{
-  bytes data = 1 [(validate.rules).bytes = {min_len:1}];
-
-
-}
-
-message PushToAllRequest{
   string gateway_id = 1 [(validate.rules).string = {min_len:1}];
-  bytes data = 2 [(validate.rules).bytes = {min_len:1}];
-
-}
-
-message PushToAllResponse{
-  uint64 data = 1[(validate.rules).uint64 = {gt:0}];
+  string cmd = 2 [(validate.rules).string = {min_len:1}];
+  uint32 request_id =3[(validate.rules).uint32.gte = 0];
+  bytes data = 4 [(validate.rules).bytes = {min_len:1}];
 }
 
 
@@ -68,13 +59,6 @@ service GatewayService {
   rpc SendMessage(stream SendMessageRequest) returns(stream SendMessageResponse){
     option (google.api.http) = {
       post: "/v1/api/gateway/send",
-      body:"*"
-    };
-  }
-
-  rpc PushToAllMessage(stream PushToAllRequest) returns(stream PushToAllResponse){
-    option (google.api.http) = {
-      post: "/v1/api/gateway/pushToAll",
       body:"*"
     };
   }

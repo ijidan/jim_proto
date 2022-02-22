@@ -25,7 +25,6 @@ type GatewayServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	UnRegister(ctx context.Context, in *UnRegisterRequest, opts ...grpc.CallOption) (*UnRegisterResponse, error)
 	SendMessage(ctx context.Context, opts ...grpc.CallOption) (GatewayService_SendMessageClient, error)
-	PushToAllMessage(ctx context.Context, opts ...grpc.CallOption) (GatewayService_PushToAllMessageClient, error)
 }
 
 type gatewayServiceClient struct {
@@ -85,37 +84,6 @@ func (x *gatewayServiceSendMessageClient) Recv() (*SendMessageResponse, error) {
 	return m, nil
 }
 
-func (c *gatewayServiceClient) PushToAllMessage(ctx context.Context, opts ...grpc.CallOption) (GatewayService_PushToAllMessageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &GatewayService_ServiceDesc.Streams[1], "/message.GatewayService/PushToAllMessage", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &gatewayServicePushToAllMessageClient{stream}
-	return x, nil
-}
-
-type GatewayService_PushToAllMessageClient interface {
-	Send(*PushToAllRequest) error
-	Recv() (*PushToAllResponse, error)
-	grpc.ClientStream
-}
-
-type gatewayServicePushToAllMessageClient struct {
-	grpc.ClientStream
-}
-
-func (x *gatewayServicePushToAllMessageClient) Send(m *PushToAllRequest) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *gatewayServicePushToAllMessageClient) Recv() (*PushToAllResponse, error) {
-	m := new(PushToAllResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // GatewayServiceServer is the server API for GatewayService service.
 // All implementations must embed UnimplementedGatewayServiceServer
 // for forward compatibility
@@ -123,7 +91,6 @@ type GatewayServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	UnRegister(context.Context, *UnRegisterRequest) (*UnRegisterResponse, error)
 	SendMessage(GatewayService_SendMessageServer) error
-	PushToAllMessage(GatewayService_PushToAllMessageServer) error
 	mustEmbedUnimplementedGatewayServiceServer()
 }
 
@@ -139,9 +106,6 @@ func (UnimplementedGatewayServiceServer) UnRegister(context.Context, *UnRegister
 }
 func (UnimplementedGatewayServiceServer) SendMessage(GatewayService_SendMessageServer) error {
 	return status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
-}
-func (UnimplementedGatewayServiceServer) PushToAllMessage(GatewayService_PushToAllMessageServer) error {
-	return status.Errorf(codes.Unimplemented, "method PushToAllMessage not implemented")
 }
 func (UnimplementedGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {}
 
@@ -218,32 +182,6 @@ func (x *gatewayServiceSendMessageServer) Recv() (*SendMessageRequest, error) {
 	return m, nil
 }
 
-func _GatewayService_PushToAllMessage_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(GatewayServiceServer).PushToAllMessage(&gatewayServicePushToAllMessageServer{stream})
-}
-
-type GatewayService_PushToAllMessageServer interface {
-	Send(*PushToAllResponse) error
-	Recv() (*PushToAllRequest, error)
-	grpc.ServerStream
-}
-
-type gatewayServicePushToAllMessageServer struct {
-	grpc.ServerStream
-}
-
-func (x *gatewayServicePushToAllMessageServer) Send(m *PushToAllResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *gatewayServicePushToAllMessageServer) Recv() (*PushToAllRequest, error) {
-	m := new(PushToAllRequest)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // GatewayService_ServiceDesc is the grpc.ServiceDesc for GatewayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -264,12 +202,6 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "SendMessage",
 			Handler:       _GatewayService_SendMessage_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "PushToAllMessage",
-			Handler:       _GatewayService_PushToAllMessage_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

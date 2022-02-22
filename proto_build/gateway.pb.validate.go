@@ -651,6 +651,39 @@ func (m *SendMessageResponse) validate(all bool) error {
 
 	var errors []error
 
+	if utf8.RuneCountInString(m.GetGatewayId()) < 1 {
+		err := SendMessageResponseValidationError{
+			field:  "GatewayId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetCmd()) < 1 {
+		err := SendMessageResponseValidationError{
+			field:  "Cmd",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetRequestId() < 0 {
+		err := SendMessageResponseValidationError{
+			field:  "RequestId",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(m.GetData()) < 1 {
 		err := SendMessageResponseValidationError{
 			field:  "Data",
@@ -741,238 +774,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendMessageResponseValidationError{}
-
-// Validate checks the field values on PushToAllRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *PushToAllRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PushToAllRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PushToAllRequestMultiError, or nil if none found.
-func (m *PushToAllRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PushToAllRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if utf8.RuneCountInString(m.GetGatewayId()) < 1 {
-		err := PushToAllRequestValidationError{
-			field:  "GatewayId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(m.GetData()) < 1 {
-		err := PushToAllRequestValidationError{
-			field:  "Data",
-			reason: "value length must be at least 1 bytes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return PushToAllRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// PushToAllRequestMultiError is an error wrapping multiple validation errors
-// returned by PushToAllRequest.ValidateAll() if the designated constraints
-// aren't met.
-type PushToAllRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PushToAllRequestMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PushToAllRequestMultiError) AllErrors() []error { return m }
-
-// PushToAllRequestValidationError is the validation error returned by
-// PushToAllRequest.Validate if the designated constraints aren't met.
-type PushToAllRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e PushToAllRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e PushToAllRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e PushToAllRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e PushToAllRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e PushToAllRequestValidationError) ErrorName() string { return "PushToAllRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e PushToAllRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sPushToAllRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = PushToAllRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = PushToAllRequestValidationError{}
-
-// Validate checks the field values on PushToAllResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *PushToAllResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on PushToAllResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// PushToAllResponseMultiError, or nil if none found.
-func (m *PushToAllResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *PushToAllResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetData() <= 0 {
-		err := PushToAllResponseValidationError{
-			field:  "Data",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return PushToAllResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// PushToAllResponseMultiError is an error wrapping multiple validation errors
-// returned by PushToAllResponse.ValidateAll() if the designated constraints
-// aren't met.
-type PushToAllResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PushToAllResponseMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PushToAllResponseMultiError) AllErrors() []error { return m }
-
-// PushToAllResponseValidationError is the validation error returned by
-// PushToAllResponse.Validate if the designated constraints aren't met.
-type PushToAllResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e PushToAllResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e PushToAllResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e PushToAllResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e PushToAllResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e PushToAllResponseValidationError) ErrorName() string {
-	return "PushToAllResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e PushToAllResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sPushToAllResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = PushToAllResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = PushToAllResponseValidationError{}
