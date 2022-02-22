@@ -695,6 +695,17 @@ func (m *SendMessageResponse) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if utf8.RuneCountInString(m.GetReceiverId()) < 1 {
+		err := SendMessageResponseValidationError{
+			field:  "ReceiverId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return SendMessageResponseMultiError(errors)
 	}

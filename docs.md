@@ -867,6 +867,7 @@
 | cmd | [string](#string) |  |  |
 | request_id | [uint32](#uint32) |  |  |
 | data | [bytes](#bytes) |  |  |
+| receiver_id | [string](#string) |  |  |
 
 
 
