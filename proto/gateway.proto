@@ -30,6 +30,8 @@ message SendMessageRequest{
   string cmd = 2 [(validate.rules).string = {min_len:1}];
   uint32 request_id =3[(validate.rules).uint32.gte = 0];
   bytes data = 4 [(validate.rules).bytes = {min_len:1}];
+  string sender_id = 5 [(validate.rules).string = {min_len:1}];
+
 }
 
 message SendMessageResponse{
