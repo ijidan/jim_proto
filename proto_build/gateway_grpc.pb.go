@@ -25,6 +25,7 @@ type GatewayServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	UnRegister(ctx context.Context, in *UnRegisterRequest, opts ...grpc.CallOption) (*UnRegisterResponse, error)
 	SendMessage(ctx context.Context, opts ...grpc.CallOption) (GatewayService_SendMessageClient, error)
+	SendToAll(ctx context.Context, in *SendToAllRequest, opts ...grpc.CallOption) (*SendToAllResponse, error)
 }
 
 type gatewayServiceClient struct {
@@ -37,7 +38,7 @@ func NewGatewayServiceClient(cc grpc.ClientConnInterface) GatewayServiceClient {
 
 func (c *gatewayServiceClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, "/message.GatewayService/Register", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/gateway.GatewayService/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +47,7 @@ func (c *gatewayServiceClient) Register(ctx context.Context, in *RegisterRequest
 
 func (c *gatewayServiceClient) UnRegister(ctx context.Context, in *UnRegisterRequest, opts ...grpc.CallOption) (*UnRegisterResponse, error) {
 	out := new(UnRegisterResponse)
-	err := c.cc.Invoke(ctx, "/message.GatewayService/UnRegister", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/gateway.GatewayService/UnRegister", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +55,7 @@ func (c *gatewayServiceClient) UnRegister(ctx context.Context, in *UnRegisterReq
 }
 
 func (c *gatewayServiceClient) SendMessage(ctx context.Context, opts ...grpc.CallOption) (GatewayService_SendMessageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &GatewayService_ServiceDesc.Streams[0], "/message.GatewayService/SendMessage", opts...)
+	stream, err := c.cc.NewStream(ctx, &GatewayService_ServiceDesc.Streams[0], "/gateway.GatewayService/SendMessage", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +85,15 @@ func (x *gatewayServiceSendMessageClient) Recv() (*SendMessageResponse, error) {
 	return m, nil
 }
 
+func (c *gatewayServiceClient) SendToAll(ctx context.Context, in *SendToAllRequest, opts ...grpc.CallOption) (*SendToAllResponse, error) {
+	out := new(SendToAllResponse)
+	err := c.cc.Invoke(ctx, "/gateway.GatewayService/SendToAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GatewayServiceServer is the server API for GatewayService service.
 // All implementations must embed UnimplementedGatewayServiceServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type GatewayServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	UnRegister(context.Context, *UnRegisterRequest) (*UnRegisterResponse, error)
 	SendMessage(GatewayService_SendMessageServer) error
+	SendToAll(context.Context, *SendToAllRequest) (*SendToAllResponse, error)
 	mustEmbedUnimplementedGatewayServiceServer()
 }
 
@@ -106,6 +117,9 @@ func (UnimplementedGatewayServiceServer) UnRegister(context.Context, *UnRegister
 }
 func (UnimplementedGatewayServiceServer) SendMessage(GatewayService_SendMessageServer) error {
 	return status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (UnimplementedGatewayServiceServer) SendToAll(context.Context, *SendToAllRequest) (*SendToAllResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendToAll not implemented")
 }
 func (UnimplementedGatewayServiceServer) mustEmbedUnimplementedGatewayServiceServer() {}
 
@@ -130,7 +144,7 @@ func _GatewayService_Register_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/message.GatewayService/Register",
+		FullMethod: "/gateway.GatewayService/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GatewayServiceServer).Register(ctx, req.(*RegisterRequest))
@@ -148,7 +162,7 @@ func _GatewayService_UnRegister_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/message.GatewayService/UnRegister",
+		FullMethod: "/gateway.GatewayService/UnRegister",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GatewayServiceServer).UnRegister(ctx, req.(*UnRegisterRequest))
@@ -182,11 +196,29 @@ func (x *gatewayServiceSendMessageServer) Recv() (*SendMessageRequest, error) {
 	return m, nil
 }
 
+func _GatewayService_SendToAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendToAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServiceServer).SendToAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/gateway.GatewayService/SendToAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServiceServer).SendToAll(ctx, req.(*SendToAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GatewayService_ServiceDesc is the grpc.ServiceDesc for GatewayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GatewayService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "message.GatewayService",
+	ServiceName: "gateway.GatewayService",
 	HandlerType: (*GatewayServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -196,6 +228,10 @@ var GatewayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnRegister",
 			Handler:    _GatewayService_UnRegister_Handler,
+		},
+		{
+			MethodName: "SendToAll",
+			Handler:    _GatewayService_SendToAll_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

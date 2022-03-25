@@ -1,5 +1,5 @@
 syntax = "proto3";
-package message;
+package gateway;
 option go_package = "proto_build/;proto_build";
 
 import "google/api/annotations.proto";
@@ -43,6 +43,15 @@ message SendMessageResponse{
 
 }
 
+message SendToAllRequest{
+  bytes data = 1 [(validate.rules).bytes = {min_len:1}];
+  string sender_id = 2 [(validate.rules).string = {min_len:1}];
+}
+
+message SendToAllResponse{
+
+}
+
 
 service GatewayService {
 
@@ -66,5 +75,14 @@ service GatewayService {
       body:"*"
     };
   }
+
+  rpc SendToAll(SendToAllRequest) returns(SendToAllResponse){
+    option (google.api.http)={
+      post:"/v1/api/gateway/sendToAll",
+      body:"*"
+    };
+  }
+
+
 }
 

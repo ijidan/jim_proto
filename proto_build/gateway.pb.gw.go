@@ -142,6 +142,40 @@ func request_GatewayService_SendMessage_0(ctx context.Context, marshaler runtime
 	return stream, metadata, nil
 }
 
+func request_GatewayService_SendToAll_0(ctx context.Context, marshaler runtime.Marshaler, client GatewayServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SendToAllRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.SendToAll(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_GatewayService_SendToAll_0(ctx context.Context, marshaler runtime.Marshaler, server GatewayServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SendToAllRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.SendToAll(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 // RegisterGatewayServiceHandlerServer registers the http handlers for service GatewayService to "mux".
 // UnaryRPC     :call GatewayServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -154,7 +188,7 @@ func RegisterGatewayServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/message.GatewayService/Register", runtime.WithHTTPPathPattern("/v1/api/gateway/register"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/gateway.GatewayService/Register", runtime.WithHTTPPathPattern("/v1/api/gateway/register"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -177,7 +211,7 @@ func RegisterGatewayServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/message.GatewayService/UnRegister", runtime.WithHTTPPathPattern("/v1/api/gateway/unRegister"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/gateway.GatewayService/UnRegister", runtime.WithHTTPPathPattern("/v1/api/gateway/unRegister"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -199,6 +233,29 @@ func RegisterGatewayServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
+	})
+
+	mux.Handle("POST", pattern_GatewayService_SendToAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/gateway.GatewayService/SendToAll", runtime.WithHTTPPathPattern("/v1/api/gateway/sendToAll"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_GatewayService_SendToAll_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_GatewayService_SendToAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
 
 	return nil
@@ -246,7 +303,7 @@ func RegisterGatewayServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/message.GatewayService/Register", runtime.WithHTTPPathPattern("/v1/api/gateway/register"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/gateway.GatewayService/Register", runtime.WithHTTPPathPattern("/v1/api/gateway/register"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -266,7 +323,7 @@ func RegisterGatewayServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/message.GatewayService/UnRegister", runtime.WithHTTPPathPattern("/v1/api/gateway/unRegister"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/gateway.GatewayService/UnRegister", runtime.WithHTTPPathPattern("/v1/api/gateway/unRegister"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -286,7 +343,7 @@ func RegisterGatewayServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/message.GatewayService/SendMessage", runtime.WithHTTPPathPattern("/v1/api/gateway/send"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/gateway.GatewayService/SendMessage", runtime.WithHTTPPathPattern("/v1/api/gateway/send"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -302,6 +359,26 @@ func RegisterGatewayServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 	})
 
+	mux.Handle("POST", pattern_GatewayService_SendToAll_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/gateway.GatewayService/SendToAll", runtime.WithHTTPPathPattern("/v1/api/gateway/sendToAll"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_GatewayService_SendToAll_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_GatewayService_SendToAll_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -311,6 +388,8 @@ var (
 	pattern_GatewayService_UnRegister_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "gateway", "unRegister"}, ""))
 
 	pattern_GatewayService_SendMessage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "gateway", "send"}, ""))
+
+	pattern_GatewayService_SendToAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "api", "gateway", "sendToAll"}, ""))
 )
 
 var (
@@ -319,4 +398,6 @@ var (
 	forward_GatewayService_UnRegister_0 = runtime.ForwardResponseMessage
 
 	forward_GatewayService_SendMessage_0 = runtime.ForwardResponseStream
+
+	forward_GatewayService_SendToAll_0 = runtime.ForwardResponseMessage
 )

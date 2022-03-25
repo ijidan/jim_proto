@@ -51,14 +51,16 @@
     - [FeedService](#user-FeedService)
   
 - [gateway.proto](#gateway-proto)
-    - [RegisterRequest](#message-RegisterRequest)
-    - [RegisterResponse](#message-RegisterResponse)
-    - [SendMessageRequest](#message-SendMessageRequest)
-    - [SendMessageResponse](#message-SendMessageResponse)
-    - [UnRegisterRequest](#message-UnRegisterRequest)
-    - [UnRegisterResponse](#message-UnRegisterResponse)
+    - [RegisterRequest](#gateway-RegisterRequest)
+    - [RegisterResponse](#gateway-RegisterResponse)
+    - [SendMessageRequest](#gateway-SendMessageRequest)
+    - [SendMessageResponse](#gateway-SendMessageResponse)
+    - [SendToAllRequest](#gateway-SendToAllRequest)
+    - [SendToAllResponse](#gateway-SendToAllResponse)
+    - [UnRegisterRequest](#gateway-UnRegisterRequest)
+    - [UnRegisterResponse](#gateway-UnRegisterResponse)
   
-    - [GatewayService](#message-GatewayService)
+    - [GatewayService](#gateway-GatewayService)
   
 - [group.proto](#group-proto)
     - [CreateGroupRequest](#group-CreateGroupRequest)
@@ -811,7 +813,7 @@
 
 
 
-<a name="message-RegisterRequest"></a>
+<a name="gateway-RegisterRequest"></a>
 
 ### RegisterRequest
 
@@ -827,7 +829,7 @@
 
 
 
-<a name="message-RegisterResponse"></a>
+<a name="gateway-RegisterResponse"></a>
 
 ### RegisterResponse
 
@@ -837,7 +839,7 @@
 
 
 
-<a name="message-SendMessageRequest"></a>
+<a name="gateway-SendMessageRequest"></a>
 
 ### SendMessageRequest
 
@@ -849,13 +851,14 @@
 | cmd | [string](#string) |  |  |
 | request_id | [uint32](#uint32) |  |  |
 | data | [bytes](#bytes) |  |  |
+| sender_id | [string](#string) |  |  |
 
 
 
 
 
 
-<a name="message-SendMessageResponse"></a>
+<a name="gateway-SendMessageResponse"></a>
 
 ### SendMessageResponse
 
@@ -874,7 +877,33 @@
 
 
 
-<a name="message-UnRegisterRequest"></a>
+<a name="gateway-SendToAllRequest"></a>
+
+### SendToAllRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| data | [bytes](#bytes) |  |  |
+| sender_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="gateway-SendToAllResponse"></a>
+
+### SendToAllResponse
+
+
+
+
+
+
+
+<a name="gateway-UnRegisterRequest"></a>
 
 ### UnRegisterRequest
 
@@ -890,7 +919,7 @@
 
 
 
-<a name="message-UnRegisterResponse"></a>
+<a name="gateway-UnRegisterResponse"></a>
 
 ### UnRegisterResponse
 
@@ -906,16 +935,17 @@
  
 
 
-<a name="message-GatewayService"></a>
+<a name="gateway-GatewayService"></a>
 
 ### GatewayService
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Register | [RegisterRequest](#message-RegisterRequest) | [RegisterResponse](#message-RegisterResponse) |  |
-| UnRegister | [UnRegisterRequest](#message-UnRegisterRequest) | [UnRegisterResponse](#message-UnRegisterResponse) |  |
-| SendMessage | [SendMessageRequest](#message-SendMessageRequest) stream | [SendMessageResponse](#message-SendMessageResponse) stream |  |
+| Register | [RegisterRequest](#gateway-RegisterRequest) | [RegisterResponse](#gateway-RegisterResponse) |  |
+| UnRegister | [UnRegisterRequest](#gateway-UnRegisterRequest) | [UnRegisterResponse](#gateway-UnRegisterResponse) |  |
+| SendMessage | [SendMessageRequest](#gateway-SendMessageRequest) stream | [SendMessageResponse](#gateway-SendMessageResponse) stream |  |
+| SendToAll | [SendToAllRequest](#gateway-SendToAllRequest) | [SendToAllResponse](#gateway-SendToAllResponse) |  |
 
  
 

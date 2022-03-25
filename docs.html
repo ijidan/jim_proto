@@ -357,34 +357,42 @@
             <ul>
               
                 <li>
-                  <a href="#message.RegisterRequest"><span class="badge">M</span>RegisterRequest</a>
+                  <a href="#gateway.RegisterRequest"><span class="badge">M</span>RegisterRequest</a>
                 </li>
               
                 <li>
-                  <a href="#message.RegisterResponse"><span class="badge">M</span>RegisterResponse</a>
+                  <a href="#gateway.RegisterResponse"><span class="badge">M</span>RegisterResponse</a>
                 </li>
               
                 <li>
-                  <a href="#message.SendMessageRequest"><span class="badge">M</span>SendMessageRequest</a>
+                  <a href="#gateway.SendMessageRequest"><span class="badge">M</span>SendMessageRequest</a>
                 </li>
               
                 <li>
-                  <a href="#message.SendMessageResponse"><span class="badge">M</span>SendMessageResponse</a>
+                  <a href="#gateway.SendMessageResponse"><span class="badge">M</span>SendMessageResponse</a>
                 </li>
               
                 <li>
-                  <a href="#message.UnRegisterRequest"><span class="badge">M</span>UnRegisterRequest</a>
+                  <a href="#gateway.SendToAllRequest"><span class="badge">M</span>SendToAllRequest</a>
                 </li>
               
                 <li>
-                  <a href="#message.UnRegisterResponse"><span class="badge">M</span>UnRegisterResponse</a>
+                  <a href="#gateway.SendToAllResponse"><span class="badge">M</span>SendToAllResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#gateway.UnRegisterRequest"><span class="badge">M</span>UnRegisterRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#gateway.UnRegisterResponse"><span class="badge">M</span>UnRegisterResponse</a>
                 </li>
               
               
               
               
                 <li>
-                  <a href="#message.GatewayService"><span class="badge">S</span>GatewayService</a>
+                  <a href="#gateway.GatewayService"><span class="badge">S</span>GatewayService</a>
                 </li>
               
             </ul>
@@ -2856,7 +2864,7 @@
       <p></p>
 
       
-        <h3 id="message.RegisterRequest">RegisterRequest</h3>
+        <h3 id="gateway.RegisterRequest">RegisterRequest</h3>
         <p></p>
 
         
@@ -2925,14 +2933,14 @@
 
         
       
-        <h3 id="message.RegisterResponse">RegisterResponse</h3>
+        <h3 id="gateway.RegisterResponse">RegisterResponse</h3>
         <p></p>
 
         
 
         
       
-        <h3 id="message.SendMessageRequest">SendMessageRequest</h3>
+        <h3 id="gateway.SendMessageRequest">SendMessageRequest</h3>
         <p></p>
 
         
@@ -2966,6 +2974,13 @@
                 <tr>
                   <td>data</td>
                   <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sender_id</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -3030,6 +3045,17 @@
                   </td>
                 </tr>
               
+                <tr>
+                  <td>sender_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>string.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
               </tbody>
             </table>
             
@@ -3037,7 +3063,7 @@
 
         
       
-        <h3 id="message.SendMessageResponse">SendMessageResponse</h3>
+        <h3 id="gateway.SendMessageResponse">SendMessageResponse</h3>
         <p></p>
 
         
@@ -3160,7 +3186,83 @@
 
         
       
-        <h3 id="message.UnRegisterRequest">UnRegisterRequest</h3>
+        <h3 id="gateway.SendToAllRequest">SendToAllRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sender_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+            
+            
+            <h4>Validated Fields</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Field</td>
+                  <td>Validations</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>data</td>
+                  <td>
+                    <ul>
+                    
+                      <li>bytes.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+                <tr>
+                  <td>sender_id</td>
+                  <td>
+                    <ul>
+                    
+                      <li>string.min_len: 1</li>
+                    
+                    </ul>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+          
+
+        
+      
+        <h3 id="gateway.SendToAllResponse">SendToAllResponse</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="gateway.UnRegisterRequest">UnRegisterRequest</h3>
         <p></p>
 
         
@@ -3229,7 +3331,7 @@
 
         
       
-        <h3 id="message.UnRegisterResponse">UnRegisterResponse</h3>
+        <h3 id="gateway.UnRegisterResponse">UnRegisterResponse</h3>
         <p></p>
 
         
@@ -3242,7 +3344,7 @@
       
 
       
-        <h3 id="message.GatewayService">GatewayService</h3>
+        <h3 id="gateway.GatewayService">GatewayService</h3>
         <p></p>
         <table class="enum-table">
           <thead>
@@ -3252,22 +3354,29 @@
             
               <tr>
                 <td>Register</td>
-                <td><a href="#message.RegisterRequest">RegisterRequest</a></td>
-                <td><a href="#message.RegisterResponse">RegisterResponse</a></td>
+                <td><a href="#gateway.RegisterRequest">RegisterRequest</a></td>
+                <td><a href="#gateway.RegisterResponse">RegisterResponse</a></td>
                 <td><p></p></td>
               </tr>
             
               <tr>
                 <td>UnRegister</td>
-                <td><a href="#message.UnRegisterRequest">UnRegisterRequest</a></td>
-                <td><a href="#message.UnRegisterResponse">UnRegisterResponse</a></td>
+                <td><a href="#gateway.UnRegisterRequest">UnRegisterRequest</a></td>
+                <td><a href="#gateway.UnRegisterResponse">UnRegisterResponse</a></td>
                 <td><p></p></td>
               </tr>
             
               <tr>
                 <td>SendMessage</td>
-                <td><a href="#message.SendMessageRequest">SendMessageRequest</a> stream</td>
-                <td><a href="#message.SendMessageResponse">SendMessageResponse</a> stream</td>
+                <td><a href="#gateway.SendMessageRequest">SendMessageRequest</a> stream</td>
+                <td><a href="#gateway.SendMessageResponse">SendMessageResponse</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SendToAll</td>
+                <td><a href="#gateway.SendToAllRequest">SendToAllRequest</a></td>
+                <td><a href="#gateway.SendToAllResponse">SendToAllResponse</a></td>
                 <td><p></p></td>
               </tr>
             
@@ -3315,6 +3424,16 @@
                 <td>SendMessage</td>
                 <td>POST</td>
                 <td>/v1/api/gateway/send</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SendToAll</td>
+                <td>POST</td>
+                <td>/v1/api/gateway/sendToAll</td>
                 <td>*</td>
               </tr>
               

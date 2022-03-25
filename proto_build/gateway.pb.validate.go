@@ -549,6 +549,17 @@ func (m *SendMessageRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if utf8.RuneCountInString(m.GetSenderId()) < 1 {
+		err := SendMessageRequestValidationError{
+			field:  "SenderId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return SendMessageRequestMultiError(errors)
 	}
@@ -785,3 +796,227 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendMessageResponseValidationError{}
+
+// Validate checks the field values on SendToAllRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *SendToAllRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendToAllRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendToAllRequestMultiError, or nil if none found.
+func (m *SendToAllRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendToAllRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(m.GetData()) < 1 {
+		err := SendToAllRequestValidationError{
+			field:  "Data",
+			reason: "value length must be at least 1 bytes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetSenderId()) < 1 {
+		err := SendToAllRequestValidationError{
+			field:  "SenderId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return SendToAllRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendToAllRequestMultiError is an error wrapping multiple validation errors
+// returned by SendToAllRequest.ValidateAll() if the designated constraints
+// aren't met.
+type SendToAllRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendToAllRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendToAllRequestMultiError) AllErrors() []error { return m }
+
+// SendToAllRequestValidationError is the validation error returned by
+// SendToAllRequest.Validate if the designated constraints aren't met.
+type SendToAllRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendToAllRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendToAllRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendToAllRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendToAllRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendToAllRequestValidationError) ErrorName() string { return "SendToAllRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SendToAllRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendToAllRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendToAllRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendToAllRequestValidationError{}
+
+// Validate checks the field values on SendToAllResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *SendToAllResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendToAllResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendToAllResponseMultiError, or nil if none found.
+func (m *SendToAllResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendToAllResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SendToAllResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendToAllResponseMultiError is an error wrapping multiple validation errors
+// returned by SendToAllResponse.ValidateAll() if the designated constraints
+// aren't met.
+type SendToAllResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendToAllResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendToAllResponseMultiError) AllErrors() []error { return m }
+
+// SendToAllResponseValidationError is the validation error returned by
+// SendToAllResponse.Validate if the designated constraints aren't met.
+type SendToAllResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendToAllResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendToAllResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendToAllResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendToAllResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendToAllResponseValidationError) ErrorName() string {
+	return "SendToAllResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendToAllResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendToAllResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendToAllResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendToAllResponseValidationError{}
